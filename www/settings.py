@@ -339,7 +339,7 @@ INSTALLED_APPS = (
     # 'cms.plugins.video',
     # 'zinnia',
     # 'cmsplugin_zinnia',
-    # 's3_folder_storage',
+    's3_folder_storage',
     # 'customplugins',
     'gunicorn',
     # 'django.contrib.markup',
