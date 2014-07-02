@@ -386,9 +386,6 @@ LEAGUEVINE_TOKEN_URL = "https://www.leaguevine.com"
 
 
 if ON_HEROKU:
-    # Secret key
-    SECRET_KEY = os.environ['SECRET_KEY']
-
     #TWITTER
     # get them by running  'heroku config' and put those env variables locally in local_settings.py!
     TWITTER_OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
@@ -400,12 +397,12 @@ if ON_HEROKU:
     FLICKR_API_KEY = os.environ['FLICKR_API_KEY']
     FLICKR_API_SECRET = os.environ['FLICKR_API_SECRET']
 
-    # leaguevine
-    LEAGUEVINE_CLIENT_ID = os.environ['LEAGUEVINE_CLIENT_ID']
-    LEAGUEVINE_CLIENT_PWD = os.environ['LEAGUEVINE_CLIENT_PWD']
-
-    # groupme
-    GROUPME_TOKEN = os.environ['GROUPME_TOKEN']
+    # # leaguevine
+    # LEAGUEVINE_CLIENT_ID = os.environ['LEAGUEVINE_CLIENT_ID']
+    # LEAGUEVINE_CLIENT_PWD = os.environ['LEAGUEVINE_CLIENT_PWD']
+    #
+    # # groupme
+    # GROUPME_TOKEN = os.environ['GROUPME_TOKEN']
 
 
 

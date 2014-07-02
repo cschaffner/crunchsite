@@ -66,3 +66,22 @@ $ cat reset_all_team_data.sql | heroku pg:psql --app windmillwindupsite
 locally:
 $ psql -h localhost -d wwsite -f sqlscripts/reset_all_team_data.sql
 
+
+
+HEROKU Setup:
+1. create new app
+2. add add-ons: Postgresql, NewRelic, MemCachier, CloudAMQP, etc.
+3. add the following configuration variables:
+$ heroku config:add ON_HEROKU=1
+    TWITTER_OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
+    TWITTER_OAUTH_SECRET = os.environ['TWITTER_OAUTH_SECRET']
+    TWITTER_CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
+    TWITTER_CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
+    FLICKR_API_KEY = os.environ['FLICKR_API_KEY']
+    FLICKR_API_SECRET = os.environ['FLICKR_API_SECRET']
+    AWS_ACCESS_KEY_ID       = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY   = os.environ['AWS_SECRET_ACCESS_KEY']
+    SECRET_KEY = os.environ['SECRET_KEY']
+    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+
