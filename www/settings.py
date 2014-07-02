@@ -94,7 +94,7 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = 'staticfiles'
 #os.path.join(PROJECT_PATH, "static")
 STATIC_URL = "/static/"
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
