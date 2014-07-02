@@ -30,6 +30,7 @@ kombu==3.0.20
 newrelic==2.22.1.20
 psycopg2==2.5.3
 pystache==0.5.4
+python-memcached==1.53
 pytz==2014.4
 six==1.7.3
 static==1.0.2
