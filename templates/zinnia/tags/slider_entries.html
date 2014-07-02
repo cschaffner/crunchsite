@@ -1,0 +1,28 @@
+{% load i18n staticfiles %}
+{% if entries %}
+  {% for entry in entries %}
+    <div class="col-md-3">
+      <div class="entry">
+        <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" class="thumb">
+          <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />
+        </a>
+        <h3>
+          <a href="{{ entry.get_absolute_url }}" rel="bookmark" title="{{ entry.title }}">{{ entry.title }}</a>
+        </h3>
+        <time datetime="{{ entry.creation_date|date:"c" }}" pubdate="pubdate">{{ entry.creation_date|date:"DATE_FORMAT" }}</time>
+        {% with authors=object.authors.all %}
+          {% if authors|length %}
+            {% for author in authors %}
+              <span class="vcard author">
+                {{ author }}</span>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <p>{{ entry.excerpt|safe }}</p>
+
+      </div>
+    </div>
+  {% endfor %}
+
+
+{% endif %}

@@ -1,0 +1,18 @@
+{% extends "base_section.html" %}
+{% load cms_tags menu_tags sekizai_tags %}
+
+{% block section_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 neat-images cms-content">
+        {% placeholder general_content %}
+    </div>
+    <div class="col-md-3 neat-images">
+      <ul>
+        {% show_menu 2 100 0 100 %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% load i18n %}
+<ul class="nav nav-tabs">
+  {% for category in categories %}
+  <li{% if category.slug == context_category.slug %} class="active"{% endif %}>
+    <a href="{{ category.get_absolute_url }}"
+       title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}">{{ category }}
+    </a>
+  </li>
+  {% empty %}
+  <li>
+    <a href="#">{% trans "No categories yet." %}</a>
+  </li>
+  {% endfor %}
+</ul>

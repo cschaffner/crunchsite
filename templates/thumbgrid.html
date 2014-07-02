@@ -1,0 +1,18 @@
+{% extends "base_section.html" %}
+{% load cms_tags %}
+
+{% block section_content %}
+
+  <div class="row">
+    <div class="col-md-8 neat-images cms-content">
+        {% placeholder intro %}
+    </div>
+    <div class="col-md-4 neat-images">
+        {% placeholder intro_side %}
+    </div>
+  </div>
+
+  <div class="row neat-images grid-view">
+    {% placeholder grid %}
+  </div>
+{% endblock %}

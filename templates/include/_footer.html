@@ -1,0 +1,25 @@
+{% load cms_tags menu_tags sekizai_tags staticfiles %}
+
+<div id="footer">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-12">
+        <ul class="sitemap">
+          <h3>Sitemap</h3>
+          {% show_menu 0 100 100 100 "sitemap_showmenu.html" %}
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {% show_placeholder "footer-one" "global_placeholders" %}
+      </div>
+
+      <div class="col-md-6">
+        {% show_placeholder "footer-two" "global_placeholders" %}
+      </div>
+    </div>
+  </div>
+
+</div>

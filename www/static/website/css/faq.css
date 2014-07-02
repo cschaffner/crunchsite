@@ -1,0 +1,10 @@
+#faq-content {
+
+}
+
+
+#faq-content div.plugin {
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #ecf0f1;
+}

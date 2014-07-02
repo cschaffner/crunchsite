@@ -1,0 +1,26 @@
+{% load cms_tags menu_tags sekizai_tags staticfiles %}
+
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="{% static 'website/img/windmillwindup_logo_small.png' %}" /></a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          {% show_menu 0 0 0 0 %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://twitter.com/windmillwindup" target="_blank"><i class="fa fa-twitter fa-lg"></i></a></li>
+          <li><a href="https://www.facebook.com/WindmillWindup" target="_blank"><i class="fa fa-facebook-square fa-lg"></i></a></li>
+          <li><a href="http://www.youtube.com/user/windmillwindup" target="_blank"><i class="fa fa-youtube fa-lg"></i></a></li>
+          <li><a href="https://vimeo.com/channels/648612" target="_blank"><i class="fa fa-vimeo-square fa-lg"></i></a></li>
+        </ul>
+      </div>
+     </div>
+ </nav>

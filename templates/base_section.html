@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load cms_tags menu_tags sekizai_tags static %}
+
+
+{% block base_content %}
+
+  <div class="container">
+    <div id="section-header">
+      {% placeholder section_header inherit %}
+    </div>
+  </div>
+
+  {% block submenu %}
+    <div class="container">
+      <div id="navsub">
+        <ul class="nav nav-tabs">
+          {% block submenu_items %}
+            {% page_attribute "page_title" as titleTest1 %}
+            {% page_attribute "page_title" request.current_page.parent_id as titleTest2 %}
+            <li {% if titleTest1 == titleTest2 %} class="active" {%  endif %}><a href="{% page_url request.current_page.parent %}">{% page_attribute "page_title" request.current_page.parent_id %}</a></li>
+            {% show_menu 1 1 0 100 %}
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+  {% endblock %}
+
+  <div class="container">
+    <div class="content">
+    {% block section_content %}
+    {% endblock %}
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}

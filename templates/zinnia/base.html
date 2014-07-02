@@ -1,0 +1,35 @@
+{% extends "zinnia/skeleton.html" %}
+{% load zinnia_tags i18n %}
+{% load url from future %}
+
+{% block link %}
+    <link rel="index" href="{% url 'zinnia_entry_archive_index' %}" />
+    <link rel="author" type="text/plain" href="{% url 'zinnia_humans' %}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia_rsd' %}" />
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia_wlwmanifest' %}" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url 'zinnia_opensearch' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia_entry_latest_feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia_discussion_latest_feed' %}" />
+    {% get_archives_entries "zinnia/tags/archives_entries_link.html" %}
+{% endblock %}
+
+
+
+{% block sidebar %}
+<div class="sidebar-entry">
+  <h3>{% trans "Popular entries" %}</h3>
+  {% get_popular_entries %}
+</div>
+
+<div class="sidebar-entry">
+  <h3>{% trans "Recent entries" %}</h3>
+  {% get_recent_entries %}
+</div>
+
+<div class="sidebar-entry">
+  <h3>{% trans "Random entries" %}</h3>
+  {% get_random_entries %}
+</div>
+
+
+{% endblock %}

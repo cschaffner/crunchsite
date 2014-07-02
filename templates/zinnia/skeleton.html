@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n zinnia_tags %}
+{% load url from future %}
+
+{% block headercss %}
+  <link href="{{ STATIC_URL }}website/css/blog.css" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block base_content %}
+
+    <div class="container">
+      <div class="blog-content">
+        <div class="row">
+          <div id="content" class="neat-images hfeed col-md-8">
+            {% block content %}
+
+            {% endblock %}
+          </div>
+
+          <div id="sidebar" class="col-md-4">
+            {% block sidebar %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+

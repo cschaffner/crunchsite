@@ -1,0 +1,27 @@
+{% extends "base_section.html" %}
+{% load cms_tags static %}
+
+{% block headercss %}
+<link href="{% static 'website/css/faq.css' %}" rel="stylesheet" media="screen" />
+{% endblock %}
+
+{% block section_content %}
+
+<div class="row">
+  <div class="col-md-8 neat-images">
+      <h1>{% page_attribute "page_title" %}</h1>
+      <ul id="faq-items" class="list-group"></ul>
+      <div id="faq-content">
+        {% placeholder faq_content %}
+      </div>
+  </div>
+  <div class="col-md-4 neat-images">
+      {% placeholder faq_sidebar %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footerjs %}
+  <script type="text/javascript" src="{% static 'website/js/faq.js' %}"></script>
+{% endblock %}
