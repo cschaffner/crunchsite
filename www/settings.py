@@ -386,6 +386,9 @@ LEAGUEVINE_TOKEN_URL = "https://www.leaguevine.com"
 
 
 if ON_HEROKU:
+    # Secret key
+    SECRET_KEY = os.environ['SECRET_KEY']
+
     #TWITTER
     # get them by running  'heroku config' and put those env variables locally in local_settings.py!
     TWITTER_OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
