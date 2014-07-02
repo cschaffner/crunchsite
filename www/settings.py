@@ -157,7 +157,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
-    'cms.context_processors.media',
+    'cms.context_processors.cms_settings',
     'sekizai.context_processors.sekizai',
     # 'zinnia.context_processors.version',
 )
@@ -262,7 +262,7 @@ CMS_PERMISSION = True
 EMAIL_CONFIRMATION_DAYS = 100
 EMAIL_BCC = 'huebli@gmail.com' # will be used as BCC address in all emails sent
 DEFAULT_FROM_EMAIL = 'webmaster@crunch-ultimate.net'
-SERVER_EMAIL = 'windmillwinduptech@gmail.com'
+SERVER_EMAIL = 'Crunch Site <webmaster@crunch-ultimate.net>'
 EMAIL_TEST = False
 EMAIL_TEST_RECIPIENT = ['huebli@gmail.com']
 
@@ -329,14 +329,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.comments',
-    # 'cms.plugins.file',
-    # 'cms.plugins.flash',
-    # 'cms.plugins.googlemap',
-    # 'cms.plugins.link',
-    # 'cms.plugins.picture',
-    # 'cms.plugins.snippet',
-    # 'cms.plugins.text',
-    # 'cms.plugins.video',
     # 'zinnia',
     # 'cmsplugin_zinnia',
     's3_folder_storage',
