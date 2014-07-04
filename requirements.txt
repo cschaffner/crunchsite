@@ -13,11 +13,12 @@ django-classy-tags==0.5.1
 django-cms==3.0.2
 django-mptt==0.6.0
 django-pylibmc-sasl==0.2.4
-django-reversion==1.8
+django-reversion==1.8.0
 django-s3-folder-storage==0.2
 django-sekizai==0.7
 django-storages==1.1.8
 djangocms-admin-style==0.2.2
+djangocms-column==1.3
 djangocms-file==0.0.1
 djangocms-flash==0.0.2
 djangocms-googlemap==0.0.5
@@ -25,6 +26,7 @@ djangocms-inherit==0.0.1
 djangocms-link==1.3.4
 djangocms-picture==0.0.2
 djangocms-snippet==1.0.2
+djangocms-style==1.3
 djangocms-teaser==0.0.1
 djangocms-text-ckeditor==2.1.6
 djangocms-video==0.0.1
@@ -38,4 +40,5 @@ pystache==0.5.4
 pytz==2014.4
 six==1.7.3
 static==1.0.2
+waitress==0.8.9
 wsgiref==0.1.2
