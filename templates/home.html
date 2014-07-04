@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load cms_tags sekizai_tags %}
-{% load static %}
-{% load twitter_tag cache %}
+{% load static cache %}
+{#{% load twitter_tag %}#}
 
 {% block headercss %}
   <link href="{% static 'website/css/home.css' %}" rel="stylesheet" media="screen" />
@@ -46,17 +46,17 @@
         <h2 class="opener">Latest tweets <a class="more pull-right" href="http://twitter.com/windmillwindup" target="_blank">all tweets <i class="fa fa-arrow-circle-right"></i></a></h2>
       </div>
     </div>
-    <div class="row">
-        {% cache 60 my_tweets %}
-            {% get_tweets for "windmillwindup" as tweets exclude "replies, retweets" limit 4 %}
-            {% for tweet in tweets %}
-                <div class="col-md-3">
-                  <h6><i class="fa fa-twitter"></i> <strong>{{ tweet.datetime|date:"D d M Y" }}</strong> </h6>
-                  {{ tweet.html|safe }}
-                </div>
-            {% endfor %}
-        {% endcache %}
-    </div>
+{#    <div class="row">#}
+{#        {% cache 60 my_tweets %}#}
+{#            {% get_tweets for "windmillwindup" as tweets exclude "replies, retweets" limit 4 %}#}
+{#            {% for tweet in tweets %}#}
+{#                <div class="col-md-3">#}
+{#                  <h6><i class="fa fa-twitter"></i> <strong>{{ tweet.datetime|date:"D d M Y" }}</strong> </h6>#}
+{#                  {{ tweet.html|safe }}#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% endcache %}#}
+{#    </div>#}
   </div>
 </div>
 

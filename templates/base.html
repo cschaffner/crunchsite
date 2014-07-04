@@ -4,7 +4,6 @@
   <head>
     <title>{% block title %}Crunch Ultimate Frisbee Club{%  endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="blitz" content="mu-ec4a98b2-f1934bb3-eb6c9300-c874e3fc">
     <!-- Bootstrap -->
     <link href="{% static 'website/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen" />
     <link href="{% static 'website/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
@@ -23,9 +22,9 @@
   {% include "include/_mainnav.html" %}
 
   <div id="base-content">
-    {% block base_content%}{% endblock %}
+    {% block base_content %}{% endblock %}
   </div>
-  {% include "include/_sponsors.html" %}
+{#  {% include "include/_sponsors.html" %}#}
 
   {% include "include/_footer.html" %}
 
