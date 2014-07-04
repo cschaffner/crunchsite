@@ -1,43 +1,46 @@
-{% load cms_tags staticfiles sekizai_tags menu_tags %}
+{% load cms_tags menu_tags sekizai_tags staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block title %}Crunch Ultimate Frisbee Club{% endblock title %}</title>
+    <title>{% block title %}Crunch Ultimate Frisbee Club{%  endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <!-- Bootstrap -->
+    <link href="{% static 'website/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen" />
     <link href="{% static 'website/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
     <link href="{% static 'website/css/base.css' %}" rel="stylesheet" media="screen" />
     <link href="{% static 'website/css/typography.css' %}" rel="stylesheet" media="screen" />
     <link href="{% static 'website/css/bootstrap-override.css' %}" rel="stylesheet" media="screen" />
+
     <link href="{% static 'website/favicon.ico' %}" rel="icon" type="image/x-icon" />
+
     <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,800,700' rel='stylesheet' type='text/css' />
     {% render_block "css" %}
     {% block headercss %}{%  endblock %}
-
   </head>
   <body>
-    {% cms_toolbar %}
-    {% include "include/_mainnav.html" %}
+  {% include "include/_mainnav.html" %}
 
-    <div id="base-content">
-       {% block base_content %}{% endblock %}
-    </div>
+  <div id="base-content">
+    {% block base_content %}{% endblock %}
+  </div>
+{#  {% include "include/_sponsors.html" %}#}
 
-    {% include "include/_footer.html" %}
+  {% include "include/_footer.html" %}
 
-    <script type="text/javascript">
+
+  <script type="text/javascript">
       STATIC = "{{ STATIC_URL }}website/";
-    </script>
+  </script>
 
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static 'website/bootstrap/js/ekko-lightbox.js' %}"></script>
-    {% render_block "js" %}
-    {% block footerjs %}{% endblock %}
+  <script type="text/javascript" src="{% static 'website/components/jquery/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'website/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'website/bootstrap/js/ekko-lightbox.js' %}"></script>
 
-  {#<!-- google anafantasticalitics //-->#}
+  {% render_block "js" %}
+  {% block footerjs %}{% endblock %}
+
+{#<!-- google anafantasticalitics //-->#}
 {#  <script type="text/javascript">#}
 {##}
 {#    var _gaq = _gaq || [];#}
@@ -50,7 +53,5 @@
 {#      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);#}
 {#    })();#}
 {#  </script>#}
-
   </body>
 </html>
-

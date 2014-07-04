@@ -141,7 +141,7 @@ AWS_IS_GZIPPED = False
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'crunchsite.herokuapp.com', 'crunch-ultimate.net']
+ALLOWED_HOSTS = ['127.0.0.1', 'crunchsite.herokuapp.com', 'crunch-ultimate.net', 'localhost']
 
 
 # List of callables that know how to import templates from various sources.
@@ -333,6 +333,13 @@ INSTALLED_APPS = (
     'djcelery',
     's3_folder_storage',
     'gunicorn',
+    'filer',
+    'easy_thumbnails',
+    'cmsplugin_filer_file',
+    'cmsplugin_filer_folder',
+    'cmsplugin_filer_image',
+    'cmsplugin_filer_teaser',
+    'cmsplugin_filer_video',
     # 'customplugins',
     # 'zinnia',
     # 'cmsplugin_zinnia',
@@ -355,6 +362,15 @@ INSTALLED_APPS = (
     # 'prediction',
     # 'sortedm2m',
     # 'groupme',
+)
+
+THUMBNAIL_HIGH_RESOLUTION = True
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
 )
 
 #ZINNIA (BLOG) SETTINGS
