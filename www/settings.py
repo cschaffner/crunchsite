@@ -56,7 +56,7 @@ TIME_ZONE = 'Europe/Amsterdam'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 1 # windmillwindup.herokuapp.com
+SITE_ID = 1 # crunchsite.herokuapp.com
 #SITE_ID = 3 # windmillwindup.com
 
 
@@ -160,7 +160,20 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'cms.context_processors.cms_settings',
     'sekizai.context_processors.sekizai',
     # 'zinnia.context_processors.version',
+    # Required by allauth template tags
+    "django.core.context_processors.request",
+    # allauth specific context processors
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
 )
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -340,6 +353,15 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+    'cmsplugin_contact',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'bootstrapform',
+    'member',
+    'team',
+
     # 'customplugins',
     # 'zinnia',
     # 'cmsplugin_zinnia',
@@ -349,8 +371,6 @@ INSTALLED_APPS = (
     # 'openscreen',
     # 'volunteer',
     # 'import_export',
-    # 'reversion',
-    # 'bootstrapform',
     # 'twitter_tag',
     # 'cmsplugin_flickr',
     # 'cmsplugin_vimeo',

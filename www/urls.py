@@ -41,7 +41,8 @@ urlpatterns = i18n_patterns('',
     # url(r'^forms/', include('form_designer.urls')),
     # url(r'^captcha/', include('captcha.urls')),
     # url(r'^groupme/', include('groupme.urls')),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/', include('allauth.urls')),
+    # url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^', include('cms.urls')),
 )
 
