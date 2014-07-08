@@ -353,7 +353,7 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
-    'cmsplugin_contact',
+    # 'cmsplugin_contact',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
