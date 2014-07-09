@@ -1,3 +1,16 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
+from team.models import Team
+
+class TeamListView(ListView):
+    model = Team
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(PredictionListView, self).get_context_data(**kwargs)
+    #     context['averages'] = Prediction.objects.averages()
+    #     context['num_predictions'] = Prediction.objects.all().count()
+    #     return context
+
+class TeamDetailView(DetailView):
+    model = Team
+

@@ -1,0 +1,38 @@
+{% extends 'base_section.html' %}
+{% load cms_tags sekizai_tags %}
+{% load static %}
+{% load bootstrap %}
+
+{% block section_content %}
+
+  <div class="row">
+    <div class="col-md-8">
+        {% render_model_block object %}
+        <h1>Team: {{ instance.name }}</h1>
+        <p>{{ instance.description }}</p>
+        {% endrender_model_block %}
+
+        <h2>Roster</h2>
+        {% for teammember in object.teammember_set.all %}
+            <div class="player">
+                {% render_model_block teammember %}
+                {{ instance.get_status }} - {{ instance.member.first_name }} {{ instance.member.last_name }}
+                {% endrender_model_block %}
+            </div>
+        {% endfor %}
+
+        <h2>Tournaments</h2>
+        {% for tournament in object.tournament_set.all %}
+            <div class="tournament">
+                {% render_model_block tournament %}
+                {{ instance.start_date }} - {{ instance.name }} {{ instance.city }} {{ instance.country.name }}
+                {% endrender_model_block %}
+            </div>
+        {% endfor %}
+
+
+    </div>
+
+  </div>
+
+{% endblock %}
