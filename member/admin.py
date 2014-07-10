@@ -1,9 +1,11 @@
 from django.contrib import admin
-from member.models import Person, MemberStatus
+from member.models import Person, MemberJob
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'middle_thing', 'last_name', 'status')
-    list_filter = ('status', )
+    list_display = ('first_name', 'middle_thing', 'last_name', 'jobs')
+    # list_filter = ('jobs', )
+    def jobs(self, instance):
+        return instance.jobs.all()
 
 #
 # class TeamAdmin(admin.ModelAdmin):
@@ -23,4 +25,4 @@ class PersonAdmin(admin.ModelAdmin):
 #
 
 admin.site.register(Person, PersonAdmin)
-admin.site.register(MemberStatus)
+admin.site.register(MemberJob)
