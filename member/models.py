@@ -15,10 +15,12 @@ class Person(models.Model):
     def __unicode__(self):
         return u'{0} {1} {2}'.format(self.first_name, self.middle_thing, self.last_name)
 
-    def clean(self):
-        # every person needs at least one job
-        if self.jobs.count() == 0:
-            raise ValidationError('Every person needs at least one job!')
+    # def clean(self):
+    #     # every person needs at least one job
+    #     # TODO: Let's wait until we know more about the business logic
+    #
+    #     if self.jobs.count() == 0:
+    #         raise ValidationError('Every person needs at least one job!')
 
 
 class MemberJob(models.Model):
