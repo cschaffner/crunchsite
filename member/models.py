@@ -1,6 +1,11 @@
 from django.db import models
 from django_iban.fields import IBANField, SWIFTBICField
 from django.core.exceptions import ValidationError
+from cms.models.fields import PlaceholderField
+
+
+def my_member_slotname(instance):
+    return 'member_description'
 
 
 class Person(models.Model):
@@ -11,6 +16,8 @@ class Person(models.Model):
     email = models.EmailField(blank=True, null=True)
     iban = IBANField(blank=True, null=True)
     swift_bic = SWIFTBICField(blank=True, null=True)
+
+    description = PlaceholderField(my_member_slotname)
 
     def __unicode__(self):
         return u'{0} {1} {2}'.format(self.first_name, self.middle_thing, self.last_name)

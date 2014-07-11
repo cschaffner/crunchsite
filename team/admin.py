@@ -5,7 +5,7 @@ from cms.admin.placeholderadmin import PlaceholderAdminMixin
 class TournamentAdmin(admin.ModelAdmin):
     pass
 
-class TeamAdmin(admin.ModelAdmin):
+class TeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
     pass
 
 class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):

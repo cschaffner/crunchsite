@@ -1,7 +1,8 @@
 from django.contrib import admin
 from member.models import Person, MemberJob
+from cms.admin.placeholderadmin import PlaceholderAdminMixin
 
-class PersonAdmin(admin.ModelAdmin):
+class PersonAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
     list_display = ('first_name', 'middle_thing', 'last_name', 'jobs')
     # list_filter = ('jobs', )
     def jobs(self, instance):

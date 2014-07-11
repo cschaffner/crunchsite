@@ -9,7 +9,6 @@
     <div class="col-md-8">
         {% render_model_block object %}
         <h1>Team: {{ instance.name }}</h1>
-        <p>{{ instance.description }}</p>
         {% endrender_model_block %}
 
         <h2>Roster</h2>
@@ -32,6 +31,8 @@
             </div>
         {% endfor %}
 
+        <h2>Description</h2>
+        {% render_placeholder object.description %}
 
     </div>
 

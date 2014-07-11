@@ -9,11 +9,14 @@ from cms.models.fields import PlaceholderField
 def my_report_slotname(instance):
     return 'tournament_report'
 
+def my_team_slotname(instance):
+    return 'team_description'
+
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=500, null=True, blank=True)
     roster = models.ManyToManyField(Person, through='TeamMember')
+    description = PlaceholderField(my_team_slotname)
 
     def __unicode__(self):
         return self.name
