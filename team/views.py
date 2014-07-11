@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 
-from team.models import Team
+from team.models import Team, TournamentTeam
 
 class TeamListView(ListView):
     model = Team
@@ -13,4 +13,8 @@ class TeamListView(ListView):
 
 class TeamDetailView(DetailView):
     model = Team
+
+
+class TournamentTeamDetailView(DetailView):
+    model = TournamentTeam
 

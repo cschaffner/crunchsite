@@ -3,7 +3,11 @@ from django.core.urlresolvers import reverse
 
 from member.models import Person
 from django_countries.fields import CountryField
+from cms.models.fields import PlaceholderField
 
+
+def my_report_slotname(instance):
+    return 'tournament_report'
 
 
 class Team(models.Model):
@@ -15,7 +19,7 @@ class Team(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('team:detail', args=[self.pk])
+        return reverse('team:team_detail', args=[self.pk])
 
 
 class TeamMember(models.Model):
@@ -40,11 +44,9 @@ class TeamMember(models.Model):
     def __unicode__(self):
         return u'{1} ({0} of {2})'.format(self.STATUS_NAMES[self.status], self.member, self.team)
 
-    def get_status(self):
-        return self.STATUS_NAMES[self.status]
-
     class Meta:
         ordering = ['status', 'member__last_name']
+        unique_together = ['team', 'member']
 
 
 class Tournament(models.Model):
@@ -71,6 +73,9 @@ class Tournament(models.Model):
                               default=GRASS)
 
     team = models.ManyToManyField(Team, through='TournamentTeam')
+
+    class Meta:
+        ordering = ['start_date']
 
     def __unicode__(self):
         return self.name
@@ -101,6 +106,11 @@ class TournamentTeam(models.Model):
     spirit_rank = models.PositiveSmallIntegerField(null=True, blank=True)
     roster = models.ManyToManyField(Person)
 
+    report = PlaceholderField(my_report_slotname)
+
+
     def __unicode__(self):
         return u'{0} {1}'.format(self.team, self.tournament)
 
+    def get_absolute_url(self):
+        return reverse('team:tournamentteam_detail', args=[self.pk])

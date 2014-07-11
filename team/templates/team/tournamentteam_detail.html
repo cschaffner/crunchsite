@@ -1,0 +1,32 @@
+{% extends 'base_section.html' %}
+{% load cms_tags sekizai_tags %}
+{% load static %}
+{% load bootstrap %}
+
+{% block section_content %}
+
+  <div class="row">
+    <div class="col-md-8">
+        {% render_model_block object %}
+        <h1>{{ instance.team.name }} @{{ instance.tournament.name }}</h1>
+        <div class="results">
+            Seed: {{ instance.seed }} / {{ instance.tournament.number_teams }}<br>
+            Final Rank: {{ instance.final_rank }} / {{ instance.tournament.number_teams }}<br>
+            Spirit Rank: {{ instance.spirit_rank }} / {{ instance.tournament.number_teams }}<br>
+        </div>
+
+        <h2>Roster</h2>
+        {% for person in object.roster.all %}
+            <div class="player">
+                    {{ person.first_name }} {{ person.last_name }}
+            </div>
+        {% endfor %}
+        {% endrender_model_block %}
+
+        <h2>Report</h2>
+        {% render_placeholder object.report %}
+    </div>
+
+  </div>
+
+{% endblock %}

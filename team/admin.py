@@ -1,5 +1,6 @@
 from django.contrib import admin
 from team.models import Team, Tournament, TournamentTeam, TeamMember
+from cms.admin.placeholderadmin import PlaceholderAdminMixin
 
 class TournamentAdmin(admin.ModelAdmin):
     pass
@@ -7,6 +8,8 @@ class TournamentAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     pass
 
+class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
+    pass
 
 class TeamMemberAdmin(admin.ModelAdmin):
     list_display = ('member', 'team', 'status')
@@ -26,4 +29,4 @@ class TeamMemberAdmin(admin.ModelAdmin):
 admin.site.register(Tournament, TournamentAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamMember, TeamMemberAdmin)
-admin.site.register(TournamentTeam)
+admin.site.register(TournamentTeam, TournamentTeamAdmin)

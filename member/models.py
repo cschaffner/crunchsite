@@ -15,6 +15,9 @@ class Person(models.Model):
     def __unicode__(self):
         return u'{0} {1} {2}'.format(self.first_name, self.middle_thing, self.last_name)
 
+    class Meta:
+        ordering = ['last_name']
+
     # def clean(self):
     #     # every person needs at least one job
     #     # TODO: Let's wait until we know more about the business logic
