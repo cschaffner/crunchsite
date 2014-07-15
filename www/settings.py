@@ -9,8 +9,11 @@ ON_HEROKU = False
 if 'ON_HEROKU' in os.environ:
     ON_HEROKU = True
     DEBUG = os.environ.get('DEBUG', False) # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
+    SITE_ID = 1 # crunchsite.herokuapp.com
 else:
     DEBUG = True
+    SITE_ID = 1 # crunchsite.herokuapp.com
+    # SITE_ID = 2 # 127.0.0.1:8000
 
 
 ADMINS = (
@@ -55,9 +58,6 @@ TIME_ZONE = 'Europe/Amsterdam'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
-
-SITE_ID = 1 # crunchsite.herokuapp.com
-#SITE_ID = 3 # windmillwindup.com
 
 
 # If you set this to False, Django will make some optimizations so as not
@@ -169,7 +169,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
-    "django.contrib.auth.backends.ModelBackend",
+    # "django.contrib.auth.backends.ModelBackend",
+    'member.auth.MyModelBackend',
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 )
@@ -241,6 +242,16 @@ CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 CMS_CACHE_DURATIONS = {'content': 60}
 
+# ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+SOCIALACCOUNT_QUERY_EMAIL = True
+# SOCIALACCOUNT_PROVIDERS = \
+#     {'facebook':
+#        {'SCOPE': ['email', 'publish_stream'],
+#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#         'METHOD': 'oauth2',
+#         'LOCALE_FUNC': 'path.to.callable',
+#         'VERIFIED_EMAIL': False}}
 
 
 ROOT_URLCONF = 'www.urls'
