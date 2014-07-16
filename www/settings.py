@@ -26,11 +26,6 @@ SEND_BROKEN_LINK_EMAILS = False
 CELERY_SEND_TASK_ERROR_EMAILS = True
 
 
-try:
-    from local_settings import *
-    local_settings_exists = True
-except ImportError:
-    local_settings_exists = False
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -505,3 +500,9 @@ LOGGING = {
 
     }
 }
+
+# use local_settings when available
+try:
+    from local_settings import *
+except ImportError:
+    pass

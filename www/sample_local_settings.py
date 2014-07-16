@@ -6,7 +6,7 @@ and then fill in each of these fields with the information relevant to your setu
 get the correct keys etc. either from Heroku by running: heroku config
 or directly from Les or Chris
 
-this one is for local development of Christian Schaffner
+this one is for local development of ...
 """
 
 import os.path
@@ -34,3 +34,9 @@ FLICKR_API_SECRET = ''
 
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
+
+LEAGUEVINE_TOKEN = ''
+LEAGUEVINE_CLIENT_ID = ''
+LEAGUEVINE_CLIENT_PWD = ''
+
+GROUPME_TOKEN = ''

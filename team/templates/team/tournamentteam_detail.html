@@ -14,14 +14,16 @@
             Final Rank: {{ instance.final_rank }} / {{ instance.tournament.number_teams }}<br>
             Spirit Rank: {{ instance.spirit_rank }} / {{ instance.tournament.number_teams }}<br>
         </div>
+        {% endrender_model_block %}
 
         <h2>Roster</h2>
-        {% for person in object.roster.all %}
+        {% for tournamentteammember in object.tournamentteammember_set.all %}
             <div class="player">
-                    {{ person.first_name }} {{ person.last_name }}
+                {% render_model_block tournamentteammember %}
+                {{ instance.get_status_display }} - {{ instance.member.first_name }} {{ instance.member.last_name }}
+                {% endrender_model_block %}
             </div>
         {% endfor %}
-        {% endrender_model_block %}
 
         <h2>Report</h2>
         {% render_placeholder object.report %}
