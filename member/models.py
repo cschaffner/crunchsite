@@ -12,23 +12,6 @@ import hashlib
 def my_member_slotname(instance):
     return 'member_description'
 
-
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User, related_name='example_profile')
-#
-#     def __unicode__(self):
-#         return "{}'s profile".format(self.user.username)
-#
-#     class Meta:
-#         db_table = 'user_profile'
-#
-#     def account_verified(self):
-#         if self.user.is_authenticated:
-#             result = EmailAddress.objects.filter(email=self.user.email)
-#             if len(result):
-#                 return result[0].verified
-#         return False
-
 User.profile = property(lambda u: Person.objects.get_or_create(user=u)[0])
 
 class Person(models.Model):

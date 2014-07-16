@@ -43,7 +43,7 @@ urlpatterns = i18n_patterns('',
     # url(r'^captcha/', include('captcha.urls')),
     # url(r'^groupme/', include('groupme.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^accounts/profile/$', 'member.views.my_detail', name='account_profile'),
+    # url(r'^accounts/profile/$', 'member.views.my_detail', name='account_profile'),
 
     # url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^', include('cms.urls')),
