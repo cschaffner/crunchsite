@@ -29,6 +29,10 @@ CELERY_SEND_TASK_ERROR_EMAILS = True
 
 TEMPLATE_DEBUG = DEBUG
 
+DATETIME_FORMAT = 'l, j E Y, G:i'
+DATE_FORMAT = 'l, j E Y'
+
+
 
 # Parse database configuration from $DATABASE_URL (required for Heroku)
 # or use database.sqlite as default
@@ -368,7 +372,8 @@ INSTALLED_APPS = (
     'bootstrapform',
     'member',
     'team',
-
+    'localflavor',
+    'import_export',
     # 'customplugins',
     # 'zinnia',
     # 'cmsplugin_zinnia',
@@ -377,7 +382,6 @@ INSTALLED_APPS = (
     # 'team',
     # 'openscreen',
     # 'volunteer',
-    # 'import_export',
     # 'twitter_tag',
     # 'cmsplugin_flickr',
     # 'cmsplugin_vimeo',

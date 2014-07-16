@@ -8,12 +8,13 @@
   <div class="row">
     <div class="col-md-8">
         {% render_model_block object %}
-        <h1>{{ instance.team.name }} @{{ instance.competition.name }}</h1>
+        <h1>{{ instance.team.name }} @{{ instance.competition }}</h1>
         <div class="results">
             Seed: {{ instance.seed }} / {{ instance.competition.number_teams }}<br>
             Final Rank: {{ instance.final_rank }} / {{ instance.competition.number_teams }}<br>
             Spirit Rank: {{ instance.spirit_rank }} / {{ instance.competition.number_teams }}<br>
         </div>
+        {% endrender_model_block %}
 
         <h2>Roster</h2>
         {% for competitionteammember in object.competitionteammember_set.all %}

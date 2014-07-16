@@ -1,14 +1,21 @@
 from django.contrib import admin
-from team.models import Team, Tournament, TournamentTeam, TeamMember
+from team.models import Team, Tournament, TournamentTeam, TeamMember, CompetitionTeam, Competition, \
+                                TournamentTeamMember, CompetitionTeamMember
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
 
 class TournamentAdmin(admin.ModelAdmin):
+    pass
+
+class CompetitionAdmin(admin.ModelAdmin):
     pass
 
 class TeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
     pass
 
 class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
+    pass
+
+class CompetitionTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
     pass
 
 class TeamMemberAdmin(admin.ModelAdmin):
@@ -25,8 +32,21 @@ class TeamMemberAdmin(admin.ModelAdmin):
     #             # TODO: it's too much effort right now, enter ranks manually!
     #             pass
 
+class TournamentTeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('member', 'tournamentteam', 'status')
+    list_filter = ['tournamentteam']
+
+
+class CompetitionTeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('member', 'competitionteam', 'status')
+    list_filter = ['competitionteam']
+
 
 admin.site.register(Tournament, TournamentAdmin)
+admin.site.register(Competition, CompetitionAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamMember, TeamMemberAdmin)
+admin.site.register(TournamentTeamMember, TournamentTeamMemberAdmin)
+admin.site.register(CompetitionTeamMember, CompetitionTeamMemberAdmin)
 admin.site.register(TournamentTeam, TournamentTeamAdmin)
+admin.site.register(CompetitionTeam, CompetitionTeamAdmin)

@@ -147,7 +147,7 @@ class CompetitionTeam(models.Model):
 
 
     def __unicode__(self):
-        return u'{0} @{1}'.format(self.team, self.tournament)
+        return u'{0} @{1}'.format(self.team, self.competition)
 
     def get_absolute_url(self):
         return reverse('team:competitionteam_detail', args=[self.pk])
@@ -217,11 +217,13 @@ class CompetitionTeamMember(models.Model):
     PLAYER = '2PL'
     TRAINER = '3TR'
     COACH = '4CO'
+    PRACTICE = '5PR'
     STATUS_CHOICES = (
         (CAPTAIN, 'captain'),
         (PLAYER, 'player'),
         (TRAINER, 'trainer'),
         (COACH, 'coach'),
+        (PRACTICE, 'practice only'),
     )
     STATUS_NAMES = dict((k,v) for k,v in STATUS_CHOICES)
 
