@@ -120,7 +120,7 @@ class Person(models.Model):
 
     def clean(self):
         # an answer to nfb_membership must be specified if and only if other club is filled
-        if self.other_club is not None and self.nfb_membership is None:
+        if self.other_club is not None and self.other_club != u'' and self.nfb_membership is None:
             raise ValidationError('If person is member of another club, you have to specify if NFB membership is payed through Crunch.')
         if self.other_club is None and self.nfb_membership is not None:
             raise ValidationError('If person is not member of another club, you have to leave NFB membership field blank.')
