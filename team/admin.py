@@ -1,7 +1,9 @@
 from django.contrib import admin
 from team.models import Team, Tournament, TournamentTeam, TeamMember, CompetitionTeam, Competition, \
                                 TournamentTeamMember, CompetitionTeamMember
+from member.models import Person
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
+import autocomplete_light
 
 class TournamentAdmin(admin.ModelAdmin):
     pass
@@ -9,18 +11,45 @@ class TournamentAdmin(admin.ModelAdmin):
 class CompetitionAdmin(admin.ModelAdmin):
     pass
 
+class TeamMemberInline(admin.TabularInline):
+    model = TeamMember
+    form = autocomplete_light.modelform_factory(TeamMember)
+
+class TournamentTeamMemberInline(admin.TabularInline):
+    model = TournamentTeamMember
+    form = autocomplete_light.modelform_factory(TournamentTeamMember)
+
+class CompetitionTeamMemberInline(admin.TabularInline):
+    model = CompetitionTeamMember
+    form = autocomplete_light.modelform_factory(CompetitionTeamMember)
+
+
+
 class TeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
-    pass
+    inlines = [
+        TeamMemberInline
+    ]
+
 
 class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
-    pass
+    inlines = [
+        TournamentTeamMemberInline
+    ]
+
 
 class CompetitionTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
-    pass
+    inlines = [
+        CompetitionTeamMemberInline
+    ]
+
+
 
 class TeamMemberAdmin(admin.ModelAdmin):
     list_display = ('member', 'team', 'status')
     list_filter = ['team']
+    form = autocomplete_light.modelform_factory(TeamMember)
+
+
     # list_editable = ['final_rank', 'groupme_bot_id', 'groupme_share_url']
     #
     # actions = ['upload_to_leaguevine_as_test', 'update_seed_as_test', 'upload_to_leaguevine', 'update_seed',
@@ -31,6 +60,7 @@ class TeamMemberAdmin(admin.ModelAdmin):
     #         if team.leaguevine_id:
     #             # TODO: it's too much effort right now, enter ranks manually!
     #             pass
+
 
 class TournamentTeamMemberAdmin(admin.ModelAdmin):
     list_display = ('member', 'tournamentteam', 'status')

@@ -5,7 +5,8 @@ from django.views.generic.base import RedirectView
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 
-
+import autocomplete_light
+autocomplete_light.autodiscover()
 admin.autodiscover()
 
 # #old site redirects
@@ -38,6 +39,7 @@ admin.autodiscover()
 
 urlpatterns = i18n_patterns('',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
     # url(r'^news/', include('zinnia.urls')),
     # url(r'^forms/', include('form_designer.urls')),
     # url(r'^captcha/', include('captcha.urls')),
@@ -61,6 +63,9 @@ if settings.DEBUG:
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     url(r'', include('django.contrib.staticfiles.urls')),
   ) + urlpatterns
+
+# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+# urlpatterns += staticfiles_urlpatterns()
 
 
 # urlpatterns += patterns('', (

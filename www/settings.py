@@ -327,6 +327,7 @@ else:
 
 
 INSTALLED_APPS = (
+    'autocomplete_light',
     'djangocms_admin_style',
     'djangocms_text_ckeditor',
     'django.contrib.auth',

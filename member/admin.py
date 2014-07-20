@@ -1,32 +1,52 @@
 from django.contrib import admin
 from member.models import Person, MemberJob
+from team.admin import TeamMemberInline
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
 from import_export.admin import ImportExportMixin
 from import_export.resources import ModelResource
 from import_export import fields
+import autocomplete_light
 
 class PersonResource(ModelResource):
     # playing_level = fields.Field()
+    # teams = fields.Field()
 
     class Meta:
         model = Person
         exclude = ('description', )
-        widgets = {
-                'birthday': {'format': '%d.%m.%Y'},
-                }
+        # widgets = {
+        #         'birthday': {'format': '%d.%m.%Y'},
+        #         }
 
-    # def dehydrate_playing_level(self, person):
-    #     return u'{0}'.format(person.get_playing_level_display())
+    # def dehydrate_teams(self, person):
+    #     assert isinstance(person.team_set, object)
+    #     return list(person.team_set.values_list('pk', flat=True))
+
+class MemberJobAdmin(admin.ModelAdmin):
+    model = MemberJob
+    form = autocomplete_light.modelform_factory(MemberJob)
+
+
+class MemberJobInline(admin.TabularInline):
+    model = MemberJob
+    form = autocomplete_light.modelform_factory(MemberJob)
 
 
 class PersonAdmin(PlaceholderAdminMixin, ImportExportMixin, admin.ModelAdmin):
     resource_class = PersonResource
-    list_display = ('first_name', 'preposition', 'last_name', 'jobs')
-    # list_filter = ('jobs', )
+    list_display = ('__unicode__', 'gender', 'playing_level')
+    list_filter = ('gender', 'playing_level')
+    inlines = [
+        TeamMemberInline,
+        MemberJobInline
+    ]
+    form = autocomplete_light.modelform_factory(Person)
+
     def jobs(self, instance):
         return instance.jobs.all()
 
 
 
+
 admin.site.register(Person, PersonAdmin)
-admin.site.register(MemberJob)
+admin.site.register(MemberJob, MemberJobAdmin)

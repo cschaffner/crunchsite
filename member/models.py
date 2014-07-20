@@ -69,6 +69,9 @@ class Person(models.Model):
     birthday = models.DateField(blank=True, null=True)
     citizenship = CountryField(blank=True, null=True)
 
+    other_club = models.CharField(max_length=100, null=True, blank=True)
+    nfb_membership = models.NullBooleanField(null=True, blank=True, verbose_name='pay NFB membership through Crunch?', default=None)
+
     discount = models.CharField(max_length=3,
                                   choices=DISCOUNT_CHOICE,
                                   default=NODISCOUNT)
@@ -86,7 +89,11 @@ class Person(models.Model):
     description = PlaceholderField(my_member_slotname)
 
     def __unicode__(self):
-        return u'{0} {1} {2}'.format(self.first_name, self.preposition, self.last_name)
+        if self.preposition:
+            full_name = u'{0} {1} {2}'.format(self.first_name, self.preposition, self.last_name)
+        else:
+            full_name = u'{0} {1}'.format(self.first_name, self.last_name)
+        return full_name
 
     def account_verified(self):
         if self.user.is_authenticated:
@@ -111,12 +118,12 @@ class Person(models.Model):
         return "http://www.gravatar.com/avatar/{}?s=40".format(hashlib.md5(self.user.email).hexdigest())
 
 
-    # def clean(self):
-    #     # every person needs at least one job
-    #     # TODO: Let's wait until we know more about the business logic
-    #
-    #     if self.jobs.count() == 0:
-    #         raise ValidationError('Every person needs at least one job!')
+    def clean(self):
+        # an answer to nfb_membership must be specified if and only if other club is filled
+        if self.other_club is not None and self.nfb_membership is None:
+            raise ValidationError('If person is member of another club, you have to specify if NFB membership is payed through Crunch.')
+        if self.other_club is None and self.nfb_membership is not None:
+            raise ValidationError('If person is not member of another club, you have to leave NFB membership field blank.')
 
 
 class MemberJob(models.Model):
