@@ -9,7 +9,6 @@
     <div class="col-md-8">
         {% render_model_block object %}
         <h1>Member: {{ instance }}</h1>
-        <p>Email: {{ instance.email }}</p>
         {% endrender_model_block %}
 
         <h2>Jobs</h2>
@@ -26,11 +25,10 @@
             <div class="team">
                 {% render_model_block teammember %}
                     {{ instance.get_status_display }} of
-                    <a href="{% url 'team:team_detail' instance.pk %}">{{ instance.team.name }}</a>
+                    <a href="{% url 'team:team_detail' instance.team.pk %}">{{ instance.team.name }}</a>
                 {% endrender_model_block %}
             </div>
         {% endfor %}
-
 
         <h2>Tournaments</h2>
         {% for tournamentteam in object.tournamentteam_set.all %}
@@ -42,6 +40,16 @@
                 {% endrender_model_block %}
             </div>
         {% endfor %}
+
+        <h2>Competitions</h2>
+        {% for competitionteam in object.competitionteam_set.all %}
+            <div class="competition">
+                {% render_model_block competitionteam %}
+                    <a href="{% url 'team:competitionteam_detail' instance.pk %}">{{ instance }}</a>
+                {% endrender_model_block %}
+            </div>
+        {% endfor %}
+
 
         <h2>Description</h2>
         {% render_placeholder object.description %}

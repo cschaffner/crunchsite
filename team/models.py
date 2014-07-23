@@ -132,6 +132,9 @@ class Competition(models.Model):
     def __unicode__(self):
         return u'{0} competition {1}'.format(self.get_div_display(), self.day1.year)
 
+    @property
+    def name(self):
+        return self.__unicode__()
 
 class CompetitionTeam(models.Model):
     team = models.ForeignKey(Team)
