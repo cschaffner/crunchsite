@@ -1,8 +1,11 @@
-windmillwindupsite
+ultimate website cms
 ==================
 
 Install from scratch on Mac OSX:
 * install homebrew
+* install node (brew install node)
+* install yuglify: (npm install yuglify)
+* install less: (npm install less)
 * install virtualenv and virtualenvwrapper
 * get source code from GitHub:
 git clone git@github.com:lkleuver/windmillwindupsite.git

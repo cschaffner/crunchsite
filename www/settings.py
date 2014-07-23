@@ -5,7 +5,7 @@ gettext = lambda s: s
 PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
 # check if we are on heroku (production) or on local development
-ON_HEROKU = True
+ON_HEROKU = False
 if 'ON_HEROKU' in os.environ:
     ON_HEROKU = True
     DEBUG = os.environ.get('DEBUG', False) # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
@@ -14,6 +14,7 @@ else:
     DEBUG = True
     SITE_ID = 1 # crunchsite.herokuapp.com
     # SITE_ID = 2 # 127.0.0.1:8000
+
 
 
 ADMINS = (
