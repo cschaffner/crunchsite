@@ -25,6 +25,14 @@ class TeamMenu(CMSAttachMenu):
                     node.id   # the team is the parent
                 )
                 nodes.append(subnode)
+            for competitionteam in team.competitionteam_set.all():
+                subnode = NavigationNode(
+                    competitionteam.competition.name,
+                    competitionteam.get_absolute_url(),
+                    competitionteam.pk,
+                    node.id   # the team is the parent
+                )
+                nodes.append(subnode)
         return nodes
 
 menu_pool.register_menu(TeamMenu)

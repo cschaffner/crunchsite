@@ -134,6 +134,9 @@ class Competition(models.Model):
 class CompetitionTeam(models.Model):
     team = models.ForeignKey(Team)
     competition = models.ForeignKey(Competition)
+    competition_name = models.CharField(max_length=100,
+                                        verbose_name='Competition Team Name',
+                                        blank=True, null=True)
 
     seed = models.PositiveSmallIntegerField(null=True, blank=True)
     final_rank = models.PositiveSmallIntegerField(null=True, blank=True)
@@ -147,7 +150,10 @@ class CompetitionTeam(models.Model):
 
 
     def __unicode__(self):
-        return u'{0} @{1}'.format(self.team, self.competition)
+        if self.competition_name:
+            return u'{0} @{1}'.format(self.competition_name, self.competition)
+        else:
+            return u'{0} @{1}'.format(self.team, self.competition)
 
     def get_absolute_url(self):
         return reverse('team:competitionteam_detail', args=[self.pk])
