@@ -32,17 +32,26 @@ class TeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
 
 
 class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
+    actions = ['import_team_roster']
     inlines = [
         TournamentTeamMemberInline
     ]
 
+    def import_team_roster(modeladmin, request, queryset):
+        for tournament_team in queryset:
+            tournament_team.import_team_roster()
 
 class CompetitionTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
+    actions = ['import_team_roster']
     inlines = [
         CompetitionTeamMemberInline
     ]
 
+    def import_team_roster(modeladmin, request, queryset):
+        for competition_team in queryset:
+            competition_team.import_team_roster()
 
+    import_team_roster.short_description = 'Imports team roster from team into competionteam'
 
 class TeamMemberAdmin(admin.ModelAdmin):
     list_display = ('member', 'team', 'status')

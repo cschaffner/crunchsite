@@ -40,12 +40,14 @@ class Team(models.Model):
 class TeamMember(models.Model):
     CAPTAIN = '1CA'
     PLAYER = '2PL'
-    TRAINER = '3TR'
-    COACH = '4CO'
+    PRACTICE = '3PR'
+    TRAINER = '4TR'
+    COACH = '5CO'
     ALUMNI = '9AL'
     STATUS_CHOICES = (
         (CAPTAIN, 'captain'),
         (PLAYER, 'player'),
+        (PRACTICE, 'practice only'),
         (TRAINER, 'trainer'),
         (COACH, 'coach'),
         (ALUMNI, 'alumni'),
@@ -159,6 +161,30 @@ class CompetitionTeam(models.Model):
         return reverse('team:competitionteam_detail', args=[self.pk])
 
 
+    def import_team_roster(self):
+        """
+        if roster is of competition team is still empty
+        copies team roster from team to this competitionteam
+        """
+        if self.roster.count() == 0:
+            for team_member in self.team.teammember_set.all():
+                if team_member.status != TeamMember.ALUMNI and team_member.status != TeamMember.PRACTICE:
+                    competitionteam_member = CompetitionTeamMember(competitionteam=self,
+                                                                   member=team_member.member,
+                                                                   status=team_member.status)
+                    competitionteam_member.save()
+        return True
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # newly created object, so set a flag
+            first_time = True
+        super(CompetitionTeam, self).save(*args, **kwargs)
+        if first_time:
+            # import team roster by default
+            self.import_team_roster()
+
+
 class TournamentTeam(models.Model):
     OPEN = '1O'
     MIXED = '2M'
@@ -189,15 +215,40 @@ class TournamentTeam(models.Model):
     def get_absolute_url(self):
         return reverse('team:tournamentteam_detail', args=[self.pk])
 
+    def import_team_roster(self):
+        """
+        if roster is of competition team is still empty
+        copies team roster from team to this competitionteam
+        """
+        if self.roster.count() == 0:
+            for team_member in self.team.teammember_set.all():
+                if team_member.status != TeamMember.ALUMNI and team_member.status != TeamMember.PRACTICE:
+                    tournament_team = TournamentTeamMember(tournamentteam=self,
+                                                           member=team_member.member,
+                                                           status=team_member.status)
+                    tournament_team.save()
+        return True
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # newly created object, so set a flag
+            first_time = True
+        super(TournamentTeam, self).save(*args, **kwargs)
+        if first_time:
+            # import team roster by default
+            self.import_team_roster()
+
 
 class TournamentTeamMember(models.Model):
     CAPTAIN = '1CA'
     PLAYER = '2PL'
-    TRAINER = '3TR'
-    COACH = '4CO'
+    PRACTICE = '3PR'
+    TRAINER = '4TR'
+    COACH = '5CO'
     STATUS_CHOICES = (
         (CAPTAIN, 'captain'),
         (PLAYER, 'player'),
+        (PRACTICE, 'practice only'),
         (TRAINER, 'trainer'),
         (COACH, 'coach'),
     )
@@ -221,15 +272,15 @@ class TournamentTeamMember(models.Model):
 class CompetitionTeamMember(models.Model):
     CAPTAIN = '1CA'
     PLAYER = '2PL'
-    TRAINER = '3TR'
-    COACH = '4CO'
-    PRACTICE = '5PR'
+    PRACTICE = '3PR'
+    TRAINER = '4TR'
+    COACH = '5CO'
     STATUS_CHOICES = (
         (CAPTAIN, 'captain'),
         (PLAYER, 'player'),
+        (PRACTICE, 'practice only'),
         (TRAINER, 'trainer'),
         (COACH, 'coach'),
-        (PRACTICE, 'practice only'),
     )
     STATUS_NAMES = dict((k,v) for k,v in STATUS_CHOICES)
 
