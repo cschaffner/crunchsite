@@ -176,9 +176,7 @@ class CompetitionTeam(models.Model):
         return True
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            # newly created object, so set a flag
-            first_time = True
+        first_time = not self.id
         super(CompetitionTeam, self).save(*args, **kwargs)
         if first_time:
             # import team roster by default
@@ -230,9 +228,7 @@ class TournamentTeam(models.Model):
         return True
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            # newly created object, so set a flag
-            first_time = True
+        first_time = not self.id
         super(TournamentTeam, self).save(*args, **kwargs)
         if first_time:
             # import team roster by default
