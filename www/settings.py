@@ -114,7 +114,7 @@ if ON_HEROKU:
 AWS_HEADERS = {
     "Cache-Control": "public, max-age=86400",
 }
-AWS_STORAGE_BUCKET_NAME = 'crunchsite'
+AWS_STORAGE_BUCKET_NAME = 'crunchweb'
 S3_URL = 'https://s3-eu-west-1.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 
 DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
