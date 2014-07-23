@@ -5,7 +5,7 @@ gettext = lambda s: s
 PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
 # check if we are on heroku (production) or on local development
-ON_HEROKU = False
+ON_HEROKU = True
 if 'ON_HEROKU' in os.environ:
     ON_HEROKU = True
     DEBUG = os.environ.get('DEBUG', False) # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
@@ -76,6 +76,7 @@ DATE_FORMAT = 'l, j E Y'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, "www/static"),
+    os.path.join(PROJECT_PATH, 'www/bower_components'),
 )
 
 # List of finder classes that know how to find static files in
@@ -84,6 +85,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 
@@ -93,7 +95,7 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = 'staticfiles'
 #os.path.join(PROJECT_PATH, "static")
 STATIC_URL = "/static/"
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
@@ -338,6 +340,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django.contrib.messages',
+    'pipeline',
     'cms',
     'mptt',
     'menus',
@@ -505,6 +508,36 @@ LOGGING = {
 
     }
 }
+
+PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
+PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.less.LessCompiler',
+)
+
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+
+
+PIPELINE_CSS = {
+    'core': {
+        'source_filenames': (
+          'bootstrap/less/bootstrap.less',
+        ),
+        'output_filename': 'css/core.css',
+    },
+}
+
+PIPELINE_JS = {
+    'core': {
+        'source_filenames': (
+          'bootstrap/dist/js/bootstrap.js',
+          'jquery/dist/jquery.js',
+        ),
+        'output_filename': 'js/core.js',
+    }
+}
+
 
 # use local_settings when available
 try:
