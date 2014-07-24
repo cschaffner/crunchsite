@@ -510,8 +510,13 @@ LOGGING = {
     }
 }
 
-PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
-PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
+if ON_HEROKU:
+    PIPELINE_YUGLIFY_BINARY = os.path.join(os.getcwd(),  'lib/node_modules/yuglify/bin/yuglify')
+    PIPELINE_LESS_BINARY = os.path.join(os.getcwd(), 'lib/node_modules/less/bin/lessc')
+else:
+    PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
+    PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
+
 PIPELINE_COMPILERS = (
   'pipeline.compilers.less.LessCompiler',
 )
