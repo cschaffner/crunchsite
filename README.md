@@ -30,6 +30,17 @@ When asked, create a superuser
 5. python manage.py runserver
 
 
+TROUBLESHOOTING:
+1. If you get the following error:
+env: node: No such file or directory
+then you can follow the instructions on
+http://stackoverflow.com/questions/20061529/sublime-text-coffeescript-build-system-env-node-no-such-file-or-directory
+and do
+> sudo ln -s /usr/local/bin/node /usr/bin/node
+
+
+
+
 Push master branch to heroku:
 1. git push heroku master
 
