@@ -294,7 +294,7 @@ SERVER_EMAIL = 'Crunch Site <webmaster@crunch-ultimate.net>'
 EMAIL_TEST = False
 EMAIL_TEST_RECIPIENT = ['huebli@gmail.com']
 
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -304,8 +304,8 @@ if not ON_HEROKU:
 #    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 elif ON_HEROKU:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
-    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+    EMAIL_HOST_USER = os.environ['MAILGUN_USERNAME']
+    EMAIL_HOST_PASSWORD = os.environ['MAILGUN_PASSWORD']
 
 #    EMAIL_FILE_PATH = 'app-messages/' # change this to a proper location
 
