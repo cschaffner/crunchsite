@@ -26,9 +26,18 @@ class CompetitionTeamMemberInline(admin.TabularInline):
 
 
 class TeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
+    actions = ['create_email_list', 'add_team_members_to_mailinglist']
     inlines = [
         TeamMemberInline
     ]
+
+    def create_email_list(modeladmin, request, queryset):
+        for team in queryset:
+            team.create_mailinglist()
+
+    def add_team_members_to_mailinglist(modeladmin, request, queryset):
+        for team in queryset:
+            team.add_team_members_to_mailinglist()
 
 
 class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):

@@ -306,6 +306,7 @@ elif ON_HEROKU:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST_USER = os.environ['MAILGUN_USERNAME']
     EMAIL_HOST_PASSWORD = os.environ['MAILGUN_PASSWORD']
+    MAILGUN_API = os.environ['MAILGUN_API_KEY']
 
 #    EMAIL_FILE_PATH = 'app-messages/' # change this to a proper location
 

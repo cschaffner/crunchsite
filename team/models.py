@@ -1,10 +1,13 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.utils.text import slugify
 
+from www import settings
 from member.models import Person
 from django_countries.fields import CountryField
 from cms.models.fields import PlaceholderField
-
+import requests
+import json
 
 def my_report_slotname(instance):
     return 'tournament_report'
@@ -29,12 +32,47 @@ class Team(models.Model):
     name = models.CharField(max_length=100)
     roster = models.ManyToManyField(Person, through='TeamMember')
     description = PlaceholderField(my_team_slotname)
+    mailinglist_address = models.EmailField(blank=True, null=True)
 
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('team:team_detail', args=[self.pk])
+
+    def create_mailinglist(self):
+        if self.mailinglist_address is None:
+            self.mailinglist_address = slugify(self.name)
+            self.save()
+
+        # create email list
+        response = requests.post(
+            "https://api.mailgun.net/v2/lists",
+            auth=('api', settings.MAILGUN_API_KEY),
+            data={'address': '{0}'.format(self.mailinglist_address),
+                  'description': "{0} mailing list".format(self.name)})
+
+        # TODO: handle errors here
+
+        return response
+
+    def add_team_members_to_mailinglist(self):
+        # collect teammembers to be added
+        members = []
+        for teammember in self.teammember_set.all():
+            members.append({
+                'address': '{0} <{1}>'.format(teammember.member, teammember.member.email),
+                'vars': {'gender': teammember.member.get_gender_display()},
+            })
+        response = requests.post(
+            "https://api.mailgun.net/v2/lists/{0}/members.json".format(self.mailinglist_address),
+            auth=('api', settings.MAILGUN_API_KEY),
+            data={'subscribed': True,
+                  'members': json.dumps(members)},
+        )
+        # TODO: handle errors here
+
+        return response
 
 
 class TeamMember(models.Model):
