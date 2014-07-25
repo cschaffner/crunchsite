@@ -22,7 +22,6 @@ local_settings*
 build
 eggs
 parts
-bin
 var
 sdist
 develop-eggs

@@ -16,6 +16,7 @@ else:
     # SITE_ID = 2 # 127.0.0.1:8000
 
 
+
 ADMINS = (
     ('Christian Schaffner', 'huebli@gmail.com'),
     ('Les Kleuver', 'les.kleuver@gmail.com'),
@@ -76,6 +77,7 @@ DATE_FORMAT = 'l, j E Y'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, "www/static"),
+    os.path.join(PROJECT_PATH, 'www/bower_components'),
 )
 
 # List of finder classes that know how to find static files in
@@ -84,6 +86,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 
@@ -93,7 +96,7 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = 'staticfiles'
 #os.path.join(PROJECT_PATH, "static")
 STATIC_URL = "/static/"
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
@@ -291,7 +294,7 @@ SERVER_EMAIL = 'Crunch Site <webmaster@crunch-ultimate.net>'
 EMAIL_TEST = False
 EMAIL_TEST_RECIPIENT = ['huebli@gmail.com']
 
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -301,8 +304,8 @@ if not ON_HEROKU:
 #    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 elif ON_HEROKU:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
-    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+    EMAIL_HOST_USER = os.environ['MAILGUN_USERNAME']
+    EMAIL_HOST_PASSWORD = os.environ['MAILGUN_PASSWORD']
 
 #    EMAIL_FILE_PATH = 'app-messages/' # change this to a proper location
 
@@ -338,6 +341,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django.contrib.messages',
+    'pipeline',
     'cms',
     'mptt',
     'menus',
@@ -505,6 +509,41 @@ LOGGING = {
 
     }
 }
+
+if ON_HEROKU:
+    PIPELINE_YUGLIFY_BINARY = os.path.join(os.getcwd(),  '.heroku/python/bin/yuglify')
+    PIPELINE_LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
+else:
+    PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
+    PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
+
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.less.LessCompiler',
+)
+
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+
+
+PIPELINE_CSS = {
+    'core': {
+        'source_filenames': (
+          'bootstrap/less/bootstrap.less',
+        ),
+        'output_filename': 'css/core.css',
+    },
+}
+
+PIPELINE_JS = {
+    'core': {
+        'source_filenames': (
+          'bootstrap/dist/js/bootstrap.js',
+          'jquery/dist/jquery.js',
+        ),
+        'output_filename': 'js/core.js',
+    }
+}
+
 
 # use local_settings when available
 try:

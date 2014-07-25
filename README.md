@@ -1,8 +1,11 @@
-windmillwindupsite
+ultimate website cms
 ==================
 
 Install from scratch on Mac OSX:
 * install homebrew
+* install node (brew install node)
+* install yuglify: (npm install yuglify)
+* install less: (npm install less)
 * install virtualenv and virtualenvwrapper
 * get source code from GitHub:
 git clone git@github.com:lkleuver/windmillwindupsite.git
@@ -25,6 +28,17 @@ When asked, create a superuser
 4. python manage.py migrate --fake
 
 5. python manage.py runserver
+
+
+TROUBLESHOOTING:
+1. If you get the following error:
+env: node: No such file or directory
+then you can follow the instructions on
+http://stackoverflow.com/questions/20061529/sublime-text-coffeescript-build-system-env-node-no-such-file-or-directory
+and do
+> sudo ln -s /usr/local/bin/node /usr/bin/node
+
+
 
 
 Push master branch to heroku:
