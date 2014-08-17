@@ -529,6 +529,10 @@ PIPELINE_CSS = {
     'core': {
         'source_filenames': (
           'bootstrap/less/bootstrap.less',
+          'animate.css/animate.css',
+          'fontawesome/css/font-awesome.css',
+          'website/css/global.less',
+          'website/css/nav.less',
         ),
         'output_filename': 'css/core.css',
     },
@@ -537,8 +541,9 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'core': {
         'source_filenames': (
-          'bootstrap/dist/js/bootstrap.js',
           'jquery/dist/jquery.js',
+          'bootstrap/dist/js/bootstrap.js',
+          'website/js/nav.js',
         ),
         'output_filename': 'js/core.js',
     }

@@ -1,0 +1,38 @@
+#navigation {
+  background-color: #2c2832;
+  width: 16%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+}
+#navigation .nav-container {
+  padding: 30px;
+}
+#navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#navigation ul li ul {
+  display: none;
+}
+#navigation ul li a {
+  color: #fff;
+}
+#navigation ul li.active a {
+  text-decoration: underline;
+}
+#sub-navigation {
+  overflow: hidden;
+  width: 16%;
+  height: 100%;
+  position: fixed;
+  left: 16%;
+  background-color: #433e4a;
+}
+#content {
+  width: 68%;
+  position: absolute;
+  left: 32%;
+}

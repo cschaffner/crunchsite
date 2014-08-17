@@ -16,13 +16,33 @@
   </head>
   <body>
     {% cms_toolbar %}
-    {% include "include/_mainnav.html" %}
 
-    <div id="base-content">
-       {% block base_content %}{% endblock %}
-    </div>
 
-    {% include "include/_footer.html" %}
+      <div id="navigation">
+        <div class="nav-container">
+          <ul id="main-nav">
+          {% show_menu 0 1 100 100 %}
+          </ul>
+        </div>
+      </div>
+
+      <div id="sub-navigation">
+        <div class="sub-nav-container">
+          <ul class="original">
+          {% show_sub_menu 1 %}
+          </ul>
+          <div id="sub-nav-other"></div>
+        </div>
+      </div>
+
+
+      <div id="content">
+        <div class="container-fluid">
+          {% block base_content %}{% endblock %}
+
+          {% include "include/_footer.html" %}
+        </div>
+      </div>
 
 
 
