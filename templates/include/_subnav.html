@@ -1,0 +1,9 @@
+{% load cms_tags menu_tags sekizai_tags staticfiles %}
+
+      <div id="navsub">
+        <ul>
+          {% block submenu_items %}
+            {% show_sub_menu 1 0 %}
+          {% endblock %}
+        </ul>
+      </div>

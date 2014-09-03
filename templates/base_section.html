@@ -7,24 +7,13 @@
   {% placeholder section_header inherit %}
 
   {% block submenu %}
-      <div id="navsub">
-        <ul class="nav nav-tabs">
-          {% block submenu_items %}
-            {% page_attribute "page_title" as titleTest1 %}
-            {% page_attribute "page_title" request.current_page.parent_id as titleTest2 %}
-            <li {% if titleTest1 == titleTest2 %} class="active" {%  endif %}><a href="{% page_url request.current_page.parent %}">back to {% page_attribute "page_title" request.current_page.parent_id %}</a></li>
-            {% show_menu 2 2 0 100 %}
-          {% endblock %}
-        </ul>
-      </div>
-
+    {% include "include/_subnav.html" %}
   {% endblock %}
 
 
-    <div class="content">
-    {% block section_content %}
-    {% endblock %}
-     </div>
+
+  {% block section_content %}
+  {% endblock %}
 
 
 

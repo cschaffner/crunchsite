@@ -528,11 +528,10 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 PIPELINE_CSS = {
     'core': {
         'source_filenames': (
-          'bootstrap/less/bootstrap.less',
+          'bootstrap-custom.less',
           'animate.css/animate.css',
           'fontawesome/css/font-awesome.css',
-          'website/css/global.less',
-          'website/css/nav.less',
+          'website/css/*.less',
         ),
         'output_filename': 'css/core.css',
     },

@@ -8,48 +8,26 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% render_block "css" %}
+    {% compressed_css 'core' %}
     {% block headercss %}{%  endblock %}
 
-    {% compressed_css 'core' %}
+
 
 
   </head>
-  <body>
+  <body {% block body_class %}{% endblock %}>
     {% cms_toolbar %}
 
+    {% include "include/_mainnav.html" %}
 
-      <div id="navigation">
-        <div class="nav-container">
-          <ul id="main-nav">
-          {% show_menu 0 1 100 100 %}
-          </ul>
-        </div>
-      </div>
+    {% block base_content %}{% endblock %}
 
-      <div id="sub-navigation">
-        <div class="sub-nav-container">
-          <ul class="original">
-          {% show_sub_menu 1 %}
-          </ul>
-          <div id="sub-nav-other"></div>
-        </div>
-      </div>
-
-
-      <div id="content">
-        <div class="container-fluid">
-          {% block base_content %}{% endblock %}
-
-          {% include "include/_footer.html" %}
-        </div>
-      </div>
-
-
+    {% include "include/_footer.html" %}
 
     {% compressed_js 'core' %}
-
     {% render_block "js" %}
-    {% block footerjs %}{% endblock %}
+
+    {% block postjs %}{% endblock %}
 
 
 

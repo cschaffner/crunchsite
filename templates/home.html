@@ -1,71 +1,20 @@
 {% extends "base.html" %}
 {% load cms_tags sekizai_tags %}
 {% load static cache %}
-{#{% load twitter_tag %}#}
 
-{% block headercss %}
-  <link href="{% static 'website/css/home.css' %}" rel="stylesheet" media="screen" />
-  <link href="{% static 'website/css/blog.css' %}" rel="stylesheet" media="screen" />
-{% endblock %}
+
+{% block body_class %}home{% endblock %}
 
 {% block base_content %}
 
-<div id="home-header">
+<div id="hero">
    {% placeholder spotlights %}
 </div>
 
-
-<div id="home-cta">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 intro">
-        {% placeholder intro %}
-      </div>
-        {% placeholder whatshot %}
-    </div>
+<div class="container">
+  <div class="col-md-12">
+    home yo
   </div>
 </div>
-
-<div id="news">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="opener">Recent news <a class="more pull-right" href="/news">all news <i class="fa fa-arrow-circle-right"></i></a></h2>
-      </div>
-    </div>
-    <div class="row">
-        {% placeholder blog_content %}
-    </div>
-  </div>
-</div>
-
-<div id="tweets">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="opener">Latest tweets <a class="more pull-right" href="http://twitter.com/windmillwindup" target="_blank">all tweets <i class="fa fa-arrow-circle-right"></i></a></h2>
-      </div>
-    </div>
-{#    <div class="row">#}
-{#        {% cache 60 my_tweets %}#}
-{#            {% get_tweets for "windmillwindup" as tweets exclude "replies, retweets" limit 4 %}#}
-{#            {% for tweet in tweets %}#}
-{#                <div class="col-md-3">#}
-{#                  <h6><i class="fa fa-twitter"></i> <strong>{{ tweet.datetime|date:"D d M Y" }}</strong> </h6>#}
-{#                  {{ tweet.html|safe }}#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        {% endcache %}#}
-{#    </div>#}
-  </div>
-</div>
-
-  <div style="display: none">
-    {% placeholder activity_content %}
-  </div>
-
-{% endblock %}
-
-{% block footerjs %}
 
 {% endblock %}
