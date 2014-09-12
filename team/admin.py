@@ -1,9 +1,12 @@
 from django.contrib import admin
+from django.contrib import messages
+
 from team.models import Team, Tournament, TournamentTeam, TeamMember, CompetitionTeam, Competition, \
                                 TournamentTeamMember, CompetitionTeamMember
 from member.models import Person
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
 import autocomplete_light
+import requests
 
 class TournamentAdmin(admin.ModelAdmin):
     pass
@@ -31,13 +34,21 @@ class TeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
         TeamMemberInline
     ]
 
-    def create_email_list(modeladmin, request, queryset):
+    def create_email_list(self, request, queryset):
         for team in queryset:
-            team.create_mailinglist()
+            response = team.update_mailinglist_address()
+            if response.status_code == requests.codes.OK:
+                self.message_user(request, u'{0}: {1}'.format(team, response.content))
+            else:
+                self.message_user(request, u'{0}: {1}'.format(team, response.content), level=messages.ERROR)
 
-    def add_team_members_to_mailinglist(modeladmin, request, queryset):
+    def add_team_members_to_mailinglist(self, request, queryset):
         for team in queryset:
-            team.add_team_members_to_mailinglist()
+            response = team.add_team_members_to_mailinglist()
+            if response.status_code == requests.codes.OK:
+                self.message_user(request, u'{0}: {1}'.format(team, response.content))
+            else:
+                self.message_user(request, u'{0}: {1}'.format(team, response.content), level=messages.ERROR)
 
 
 class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
@@ -46,7 +57,7 @@ class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
         TournamentTeamMemberInline
     ]
 
-    def import_team_roster(modeladmin, request, queryset):
+    def import_team_roster(self, request, queryset):
         for tournament_team in queryset:
             tournament_team.import_team_roster()
 

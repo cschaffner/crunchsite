@@ -286,7 +286,7 @@ CMS_TEMPLATES = (
 )
 CMS_PERMISSION = True
 
-
+MAILINGLIST_URL = u'crunch-ultimate.net'  # all mailinglist addresses have to end in this URL
 EMAIL_CONFIRMATION_DAYS = 100
 EMAIL_BCC = 'huebli@gmail.com' # will be used as BCC address in all emails sent
 DEFAULT_FROM_EMAIL = 'webmaster@crunch-ultimate.net'
@@ -298,6 +298,12 @@ EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+
+MAILINGLIST_SYNC = ON_HEROKU
+# keeps mailinglist on Mailgun in sync with the team.mailinglist_address field
+# usually disabled when not on heroku, in order not to confuse the heroku database
+# watch out when developing, mailgun actions are not actually performed, but just written to logger
+
 if not ON_HEROKU:
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     EMAIL_FILE_PATH = '{0}/app-messages'.format(PROJECT_PATH)
@@ -307,6 +313,7 @@ elif ON_HEROKU:
     EMAIL_HOST_USER = os.environ['MAILGUN_USERNAME']
     EMAIL_HOST_PASSWORD = os.environ['MAILGUN_PASSWORD']
     MAILGUN_API = os.environ['MAILGUN_API_KEY']
+
 
 #    EMAIL_FILE_PATH = 'app-messages/' # change this to a proper location
 
