@@ -1,0 +1,22 @@
+body.article h1,
+body.article h2,
+body.article h3 {
+  text-align: center;
+  margin: 0 0 32px 0;
+  padding: 0;
+}
+body.article p + h2 {
+  margin-top: 32px;
+}
+body.article .container.article-content {
+  width: 800px;
+}
+body.article p {
+  overflow: hidden;
+}
+body.article p img {
+  float: left;
+  margin: 0 32px 32px 0;
+  border-radius: 8px;
+  width: 50%;
+}

@@ -28,13 +28,16 @@
 
 
 #navsub {
-  height: 70px;
-  border-bottom: 2px solid #d0d4e2;
+  margin-bottom: 32px;
 
   ul {
+    height: 70px;
+    border-bottom: 2px solid #d0d4e2;
     list-style: none;
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     text-align: center;
+
     li {
       display: inline-block;
       height: 70px;
@@ -51,7 +54,7 @@
         }
       }
 
-      &.active {
+      &.active, &.selected {
         border-bottom: 2px solid #e80037;
         a {
           color: #292a2f;

@@ -15,7 +15,7 @@
 
 
   </head>
-  <body {% block body_class %}{% endblock %}>
+  <body class="base {% block body_class %}{% endblock %}">
     {% cms_toolbar %}
 
     {% include "include/_mainnav.html" %}
@@ -27,6 +27,12 @@
     {% compressed_js 'core' %}
     {% render_block "js" %}
 
+
+    <script type="text/javascript">
+      $(function(){
+        _crunchSite = new CrunchSite({});
+      });
+    </script>
     {% block postjs %}{% endblock %}
 
 

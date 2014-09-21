@@ -18,10 +18,11 @@
   color: #31cbe7 !important;
 }
 #navsub {
-  height: 70px;
-  border-bottom: 2px solid #d0d4e2;
+  margin-bottom: 32px;
 }
 #navsub ul {
+  height: 70px;
+  border-bottom: 2px solid #d0d4e2;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -41,9 +42,11 @@
 #navsub ul li a:hover {
   color: #292a2f;
 }
-#navsub ul li.active {
+#navsub ul li.active,
+#navsub ul li.selected {
   border-bottom: 2px solid #e80037;
 }
-#navsub ul li.active a {
+#navsub ul li.active a,
+#navsub ul li.selected a {
   color: #292a2f;
 }
