@@ -534,6 +534,7 @@ CKEDITOR_SETTINGS = {
     'language': '{{ language }}',
     'toolbar': 'CMS',
     'skin': 'moono',
+    'extraAllowedContent': '*(*)',
     'stylesSet': [
       {"name": "Italic", "element": "i"},
       {"name": "Bold", "element": "strong"},

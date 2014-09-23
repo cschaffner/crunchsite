@@ -9,10 +9,12 @@
   font-weight: bold;
   font-size: 14px;
   text-transform: uppercase;
+  text-decoration: none;
 }
 .navbar .social-nav a {
   padding-left: 4px !important;
   paadding-right: 4px !important;
+  text-decoration: none;
 }
 .navbar .social-nav a:hover {
   color: #31cbe7 !important;
@@ -38,8 +40,9 @@
   text-transform: uppercase;
   color: #8d8f97;
   padding: 34px 10px 4px 10px;
+  text-decoration: none;
 }
-#navsub ul li a:hover {
+ofoot #navsub ul li a:hover {
   color: #292a2f;
 }
 #navsub ul li.active,

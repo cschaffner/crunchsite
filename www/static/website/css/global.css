@@ -2,3 +2,27 @@ body,
 html {
   height: 100%;
 }
+.sidebar .plugin {
+  border-radius: 8px;
+  background-color: #ebedf5;
+  padding: 30px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+.sidebar .plugin h1,
+.sidebar .plugin h2,
+.sidebar .plugin h3,
+.sidebar .plugin h4 {
+  margin: -30px -30px 15px -30px;
+  padding: 8px 0 8px 0;
+  background-color: #dfe2ed;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 18px;
+  color: #2c2d31;
+  text-align: center;
+}
+.sidebar .plugin a.btn {
+  display: block;
+}

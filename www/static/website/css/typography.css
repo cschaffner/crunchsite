@@ -1,15 +1,27 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:700,300&subset=latin,cyrillic-ext);
+@import url(http://fonts.googleapis.com/css?family=Roboto:700,300,100&subset=latin,cyrillic-ext);
 h1,
 h2,
 h3,
 h4 {
   font-family: Roboto, Sans-serif;
-  text-transform: uppercase;
   font-weight: bold;
   color: #2c2d31;
+  margin-top: 0;
 }
 p {
-  color: #5a5b60;
+  font-family: Helvetica, Sans-serif;
+  color: #72747c;
   font-size: 16px;
   line-height: 26px;
+}
+a {
+  font-size: 16px;
+  color: #e80037;
+  text-decoration: underline;
+}
+a:hover {
+  color: #31cbe7;
+}
+a.btn {
+  text-decoration: none;
 }

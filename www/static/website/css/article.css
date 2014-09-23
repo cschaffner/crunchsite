@@ -11,6 +11,11 @@ body.article p + h2 {
 body.article .container.article-content {
   width: 800px;
 }
+@media (max-width: 900px) {
+  body.article .container.article-content {
+    width: 95%;
+  }
+}
 body.article p {
   overflow: hidden;
 }
