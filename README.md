@@ -41,6 +41,16 @@ and do
 > sudo ln -s /usr/local/bin/node /usr/bin/node
 
 
+2. If you ever have to move the location of CMS templates, use the following code to change it directly in the database:
+
+from cms.models import Page
+for page in Page.objects.filter(template__iendswith='html'):
+    page.template = 'cmstemplates/{0}'.format(page.template)
+    page.save()
+
+
+
+
 
 
 Push master branch to heroku:

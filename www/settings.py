@@ -11,7 +11,7 @@ if 'ON_HEROKU' in os.environ:
     DEBUG = os.environ.get('DEBUG', False) # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
     SITE_ID = 1 # crunchsite.herokuapp.com
 else:
-    DEBUG = True
+    DEBUG = False
     SITE_ID = 1 # crunchsite.herokuapp.com
     # SITE_ID = 2 # 127.0.0.1:8000
 
