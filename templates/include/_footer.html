@@ -1,25 +1,29 @@
 {% load cms_tags menu_tags sekizai_tags staticfiles %}
 
+
 <div id="footer">
   <div class="container">
     <div class="row">
+      <div class="col-md-3">
+        bla
+      </div>
+      <div class="col-md-3">
+        bla 2
+      </div>
+      <div class="col-md-3">
+        bla 2
+      </div>
+      <div class="col-md-3">
+        bla 2
+      </div>
+    </div>
 
+    <div class="row">
       <div class="col-md-12">
-        <ul class="sitemap">
-          <h3>Sitemap</h3>
-          {% show_menu 0 100 100 100 "sitemap_showmenu.html" %}
+        <ul>
+          {% show_menu 0 100 100 100 "include/_sitemap_showmenu.html" %}
         </ul>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        {% static_placeholder "footer-one" %}
-      </div>
-
-      <div class="col-md-6">
-        {% static_placeholder "footer-two" %}
-      </div>
-    </div>
   </div>
-
 </div>

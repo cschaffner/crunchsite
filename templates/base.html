@@ -8,28 +8,32 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% render_block "css" %}
+    {% compressed_css 'core' %}
     {% block headercss %}{%  endblock %}
 
-    {% compressed_css 'core' %}
+
 
 
   </head>
-  <body>
+  <body class="base {% block body_class %}{% endblock %}">
     {% cms_toolbar %}
+
     {% include "include/_mainnav.html" %}
 
-    <div id="base-content">
-       {% block base_content %}{% endblock %}
-    </div>
+    {% block base_content %}{% endblock %}
 
     {% include "include/_footer.html" %}
 
-
-
     {% compressed_js 'core' %}
-
     {% render_block "js" %}
-    {% block footerjs %}{% endblock %}
+
+
+    <script type="text/javascript">
+      $(function(){
+        _crunchSite = new CrunchSite({});
+      });
+    </script>
+    {% block postjs %}{% endblock %}
 
 
 

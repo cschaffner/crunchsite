@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags %}
+{% load static cache %}
+
+
+{% block body_class %}home{% endblock %}
+
+{% block base_content %}
+
+<div id="hero">
+   <div class="spotlight" style="background-image: url('{% static "website/img/spotlight_default.png" %}');">
+     <div class="container">
+       <div class="row">
+         <div class="col-sm-4 pull-right">
+            <div class="cta">
+              <h1>This is awesome</h1>
+              <h2>as is this yo</h2>
+              <a class="btn btn-info" href="#">Sign up</a>
+            </div>
+         </div>
+       </div>
+     </div>
+   </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      {% placeholder content %}
+    </div>
+    <div class="col-sm-4 sidebar">
+      {% placeholder sidebar %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

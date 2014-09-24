@@ -1,0 +1,8 @@
+{
+  "name": "animate.css",
+  "version": "3.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/daneden/animate.css.git"
+  }
+}

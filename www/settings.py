@@ -274,15 +274,13 @@ LANGUAGES = [
 ]
 
 CMS_TEMPLATES = (
-    ('default_section.html', 'Default section'),
-    ('home.html', 'HOME'),
-    ('faq.html', 'FAQ'),
-    ('subsubmenu.html', 'Extra menu'),
-    ('thumbgrid.html', "Grid"),
-    ('global_placeholders.html', 'Global Placeholders'),
-    ('message.html', 'Plain message'),
-    ('section_no_sidebar.html', 'CMS section without side bar'),
-    ('page.html', 'testing CMS'),
+    ('cmstemplates/default_section.html', 'Default section'),
+    ('cmstemplates/home.html', 'HOME'),
+    ('cmstemplates/faq.html', 'FAQ'),
+    ('cmstemplates/thumbgrid.html', "Grid"),
+    ('cmstemplates/message.html', 'Plain message'),
+    ('cmstemplates/section_no_sidebar.html', 'CMS section without side bar'),
+    ('cmstemplates/article.html', 'Article'),
 )
 CMS_PERMISSION = True
 
@@ -344,6 +342,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.comments',
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -387,25 +386,6 @@ INSTALLED_APPS = (
     'team',
     'localflavor',
     'import_export',
-    # 'customplugins',
-    # 'zinnia',
-    # 'cmsplugin_zinnia',
-    # 'django.contrib.markup',
-    # 'django_extensions',
-    # 'team',
-    # 'openscreen',
-    # 'volunteer',
-    # 'twitter_tag',
-    # 'cmsplugin_flickr',
-    # 'cmsplugin_vimeo',
-    # 'form_designer',
-    # 'form_designer.contrib.cms_plugins.form_designer_form',
-    # 'cmsplugin_contact',
-    # 'adminsortable',
-    # 'captcha',
-    # 'prediction',
-    # 'sortedm2m',
-    # 'groupme',
 )
 
 THUMBNAIL_HIGH_RESOLUTION = True
@@ -536,7 +516,10 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 PIPELINE_CSS = {
     'core': {
         'source_filenames': (
-          'bootstrap/less/bootstrap.less',
+          'bootstrap-custom.less',
+          'animate.css/animate.css',
+          'fontawesome/css/font-awesome.css',
+          'website/css/*.less',
         ),
         'output_filename': 'css/core.css',
     },
@@ -545,11 +528,26 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'core': {
         'source_filenames': (
-          'bootstrap/dist/js/bootstrap.js',
           'jquery/dist/jquery.js',
+          'bootstrap/dist/js/bootstrap.js',
+          'website/js/CrunchSite.js',
         ),
         'output_filename': 'js/core.js',
     }
+}
+
+
+#CKEDITOR
+CKEDITOR_SETTINGS = {
+    'language': '{{ language }}',
+    'toolbar': 'CMS',
+    'skin': 'moono',
+    'extraAllowedContent': '*(*)',
+    'stylesSet': [
+      {"name": "Italic", "element": "i"},
+      {"name": "Bold", "element": "strong"},
+      {"name": "Section", "element": "section"},
+    ]
 }
 
 

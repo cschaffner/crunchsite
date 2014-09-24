@@ -1,0 +1,55 @@
+.navbar {
+  border: 0;
+}
+.navbar .navbar-brand {
+  padding-top: 24px;
+}
+.navbar .main-nav a {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.navbar .social-nav a {
+  padding-left: 4px !important;
+  paadding-right: 4px !important;
+  text-decoration: none;
+}
+.navbar .social-nav a:hover {
+  color: #31cbe7 !important;
+}
+#navsub {
+  margin-bottom: 32px;
+}
+#navsub ul {
+  height: 70px;
+  border-bottom: 2px solid #d0d4e2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#navsub ul li {
+  display: inline-block;
+  height: 70px;
+}
+#navsub ul li a {
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #8d8f97;
+  padding: 34px 10px 4px 10px;
+  text-decoration: none;
+}
+ofoot #navsub ul li a:hover {
+  color: #292a2f;
+}
+#navsub ul li.active,
+#navsub ul li.selected {
+  border-bottom: 2px solid #e80037;
+}
+#navsub ul li.active a,
+#navsub ul li.selected a {
+  color: #292a2f;
+}
