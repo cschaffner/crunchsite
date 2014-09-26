@@ -8,25 +8,21 @@ PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 ON_HEROKU = False
 if 'ON_HEROKU' in os.environ:
     ON_HEROKU = True
-    DEBUG = os.environ.get('DEBUG', False) # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
-    SITE_ID = 1 # crunchsite.herokuapp.com
+    DEBUG = os.environ.get('DEBUG', False)  # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
+    SITE_ID = 1  # crunchsite.herokuapp.com
 else:
     DEBUG = True
     SITE_ID = 1 # crunchsite.herokuapp.com
     # SITE_ID = 2 # 127.0.0.1:8000
 
-
-
 ADMINS = (
-    ('Christian Schaffner', 'huebli@gmail.com'),
-    ('Les Kleuver', 'les.kleuver@gmail.com'),
+  ('Christian Schaffner', 'huebli@gmail.com'),
+  ('Les Kleuver', 'les.kleuver@gmail.com'),
 )
 
 MANAGERS = ADMINS
 SEND_BROKEN_LINK_EMAILS = False
 CELERY_SEND_TASK_ERROR_EMAILS = True
-
-
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -76,25 +72,24 @@ DATE_FORMAT = 'l, j E Y'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, "www/static"),
-    os.path.join(PROJECT_PATH, 'www/bower_components'),
+  os.path.join(PROJECT_PATH, "www/static"),
+  os.path.join(PROJECT_PATH, 'www/bower_components'),
 )
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    'pipeline.finders.PipelineFinder',
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+  'django.contrib.staticfiles.finders.DefaultStorageFinder',
+  'pipeline.finders.PipelineFinder',
 )
-
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
 MEDIA_URL = "/media/"
 
 STATIC_ROOT = 'staticfiles'
-#os.path.join(PROJECT_PATH, "static")
+# os.path.join(PROJECT_PATH, "static")
 STATIC_URL = "/static/"
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
@@ -103,19 +98,19 @@ COUNTRIES_FLAG_URL = 'flags/{code}.png'
 BASE_URL = u'http://crunchsite.herokuapp.com'
 
 if not ON_HEROKU:
-    BASE_URL = 'http://127.0.0.1:8000'
+  BASE_URL = 'http://127.0.0.1:8000'
 
 # if on Heroku, use Amazon S3 for static files:
 if ON_HEROKU:
-    # Amazon S3 credentials
-    AWS_ACCESS_KEY_ID       = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY   = os.environ['AWS_SECRET_ACCESS_KEY']
+  # Amazon S3 credentials
+  AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+  AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 
-    SECRET_KEY = os.environ['SECRET_KEY']
+  SECRET_KEY = os.environ['SECRET_KEY']
 
 # Amazon S3 URL
 AWS_HEADERS = {
-    "Cache-Control": "public, max-age=86400",
+  "Cache-Control": "public, max-age=86400",
 }
 AWS_STORAGE_BUCKET_NAME = 'crunchweb'
 S3_URL = 'https://s3-eu-west-1.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
@@ -142,14 +137,13 @@ AWS_IS_GZIPPED = False
 #STATIC_URL = '//s3-eu-west-1.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-
 ALLOWED_HOSTS = ['127.0.0.1', 'crunchsite.herokuapp.com', 'crunch-ultimate.net', 'localhost']
 
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
+  'django.template.loaders.filesystem.Loader',
+  'django.template.loaders.app_directories.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -170,73 +164,72 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    # Needed to login by username in Django admin, regardless of `allauth`
-    # "django.contrib.auth.backends.ModelBackend",
-    'member.auth.MyModelBackend',
-    # `allauth` specific authentication methods, such as login by e-mail
-    "allauth.account.auth_backends.AuthenticationBackend",
+  # Needed to login by username in Django admin, regardless of `allauth`
+  # "django.contrib.auth.backends.ModelBackend",
+  'member.auth.MyModelBackend',
+  # `allauth` specific authentication methods, such as login by e-mail
+  "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.doc.XViewMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
-    # 'reversion.middleware.RevisionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+  'django.contrib.sessions.middleware.SessionMiddleware',
+  'django.middleware.csrf.CsrfViewMiddleware',
+  'django.contrib.auth.middleware.AuthenticationMiddleware',
+  'django.contrib.messages.middleware.MessageMiddleware',
+  'django.middleware.locale.LocaleMiddleware',
+  'django.middleware.doc.XViewMiddleware',
+  'django.middleware.common.CommonMiddleware',
+  'cms.middleware.page.CurrentPageMiddleware',
+  'cms.middleware.user.CurrentUserMiddleware',
+  'cms.middleware.toolbar.ToolbarMiddleware',
+  'django.middleware.transaction.TransactionMiddleware',
+  # 'reversion.middleware.RevisionMiddleware',
+  'django.middleware.cache.UpdateCacheMiddleware',
+  'django.middleware.common.CommonMiddleware',
+  'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 if ON_HEROKU:
-    os.environ['MEMCACHE_SERVERS'] = os.environ.get('MEMCACHIER_SERVERS', '').replace(',', ';')
-    os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME', '')
-    os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD', '')
+  os.environ['MEMCACHE_SERVERS'] = os.environ.get('MEMCACHIER_SERVERS', '').replace(',', ';')
+  os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME', '')
+  os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD', '')
 
-    CACHES = {
-      'default': {
-        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
-        'TIMEOUT': 500,
-        'BINARY': True,
-        'OPTIONS': {
-            'tcp_nodelay': True,
-            'remove_failed': 4
-        }
-      },
-        'staticfiles': {
-            "BACKEND": "django_pylibmc.memcached.PyLibMCCache",
-            "TIMEOUT": 60 * 60 * 24 * 365,
-            'BINARY': True,
-            'OPTIONS': {
-                'tcp_nodelay': True,
-                'remove_failed': 4
-            }
-        }
-
-    }
-else:
-    # disable caches for development
-    CACHES = {
+  CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }
+      'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+      'TIMEOUT': 500,
+      'BINARY': True,
+      'OPTIONS': {
+        'tcp_nodelay': True,
+        'remove_failed': 4
+      }
+    },
+    'staticfiles': {
+      "BACKEND": "django_pylibmc.memcached.PyLibMCCache",
+      "TIMEOUT": 60 * 60 * 24 * 365,
+      'BINARY': True,
+      'OPTIONS': {
+        'tcp_nodelay': True,
+        'remove_failed': 4
+      }
     }
 
-    # # or turn it on for testing
-    # CACHES = {
-    # 'default': {
-    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    #     'LOCATION': 'unique-snowflake',
-    #     }
-    # }
+  }
+else:
+  # disable caches for development
+  CACHES = {
+    'default': {
+      'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+  }
+
+  # # or turn it on for testing
+  # CACHES = {
+  # 'default': {
+  #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+  #     'LOCATION': 'unique-snowflake',
+  #     }
+  # }
 
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 0
@@ -263,30 +256,30 @@ ROOT_URLCONF = 'www.urls'
 WSGI_APPLICATION = 'www.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_PATH, "templates"),
+  # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+  # Always use forward slashes, even on Windows.
+  # Don't forget to use absolute paths, not relative paths.
+  os.path.join(PROJECT_PATH, "templates"),
 )
 
 LANGUAGES = [
-    ('en', 'English'),
+  ('en', 'English'),
 ]
 
 CMS_TEMPLATES = (
-    ('cmstemplates/default_section.html', 'Default section'),
-    ('cmstemplates/home.html', 'HOME'),
-    ('cmstemplates/faq.html', 'FAQ'),
-    ('cmstemplates/thumbgrid.html', "Grid"),
-    ('cmstemplates/message.html', 'Plain message'),
-    ('cmstemplates/section_no_sidebar.html', 'CMS section without side bar'),
-    ('cmstemplates/article.html', 'Article'),
+  ('cmstemplates/default_section.html', 'Default section'),
+  ('cmstemplates/home.html', 'HOME'),
+  ('cmstemplates/faq.html', 'FAQ'),
+  ('cmstemplates/thumbgrid.html', "Grid"),
+  ('cmstemplates/message.html', 'Plain message'),
+  ('cmstemplates/section_no_sidebar.html', 'CMS section without side bar'),
+  ('cmstemplates/article.html', 'Article'),
 )
 CMS_PERMISSION = True
 
 MAILINGLIST_URL = u'crunch-ultimate.net'  # all mailinglist addresses have to end in this URL
 EMAIL_CONFIRMATION_DAYS = 100
-EMAIL_BCC = 'huebli@gmail.com' # will be used as BCC address in all emails sent
+EMAIL_BCC = 'huebli@gmail.com'  # will be used as BCC address in all emails sent
 DEFAULT_FROM_EMAIL = 'webmaster@crunch-ultimate.net'
 SERVER_EMAIL = 'Crunch Site <webmaster@crunch-ultimate.net>'
 EMAIL_TEST = False
@@ -296,21 +289,20 @@ EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
 MAILINGLIST_SYNC = ON_HEROKU
 # keeps mailinglist on Mailgun in sync with the team.mailinglist_address field
 # usually disabled when not on heroku, in order not to confuse the heroku database
 # watch out when developing, mailgun actions are not actually performed, but just written to logger
 
 if not ON_HEROKU:
-    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-    EMAIL_FILE_PATH = '{0}/app-messages'.format(PROJECT_PATH)
+  EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+  EMAIL_FILE_PATH = '{0}/app-messages'.format(PROJECT_PATH)
 #    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 elif ON_HEROKU:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST_USER = os.environ['MAILGUN_USERNAME']
-    EMAIL_HOST_PASSWORD = os.environ['MAILGUN_PASSWORD']
-    MAILGUN_API_KEY = os.environ['MAILGUN_API_KEY']
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST_USER = os.environ['MAILGUN_USERNAME']
+  EMAIL_HOST_PASSWORD = os.environ['MAILGUN_PASSWORD']
+  MAILGUN_API_KEY = os.environ['MAILGUN_API_KEY']
 
 
 #    EMAIL_FILE_PATH = 'app-messages/' # change this to a proper location
@@ -318,22 +310,21 @@ elif ON_HEROKU:
 USE_CELERY = True
 #### Celery stuff
 if USE_CELERY:
-    CELERYD_CONCURRENCY = 1
-    CELERYD_NODES="w1"
-    CELERY_RESULT_BACKEND="amqp"
-    BROKER_POOL_LIMIT = 1
-    if ON_HEROKU:
-        BROKER_URL = os.environ['CLOUDAMQP_URL']
+  CELERYD_CONCURRENCY = 1
+  CELERYD_NODES = "w1"
+  CELERY_RESULT_BACKEND = "amqp"
+  BROKER_POOL_LIMIT = 1
+  if ON_HEROKU:
+    BROKER_URL = os.environ['CLOUDAMQP_URL']
 else:
-    # Uncomment these lines to turn off celery and make everything run inline
-    BROKER_HOST = ""
-    BROKER_PORT = 0
-    BROKER_USER = ""
-    BROKER_PASSWORD = ""
-    BROKER_VHOST = ""
-    BROKER_BACKEND='memory'
-    CELERY_ALWAYS_EAGER = True
-
+  # Uncomment these lines to turn off celery and make everything run inline
+  BROKER_HOST = ""
+  BROKER_PORT = 0
+  BROKER_USER = ""
+  BROKER_PASSWORD = ""
+  BROKER_VHOST = ""
+  BROKER_BACKEND = 'memory'
+  CELERY_ALWAYS_EAGER = True
 
 INSTALLED_APPS = (
     'autocomplete_light',
@@ -394,11 +385,11 @@ INSTALLED_APPS = (
 
 THUMBNAIL_HIGH_RESOLUTION = True
 THUMBNAIL_PROCESSORS = (
-    'easy_thumbnails.processors.colorspace',
-    'easy_thumbnails.processors.autocrop',
-    #'easy_thumbnails.processors.scale_and_crop',
-    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
-    'easy_thumbnails.processors.filters',
+  'easy_thumbnails.processors.colorspace',
+  'easy_thumbnails.processors.autocrop',
+  #'easy_thumbnails.processors.scale_and_crop',
+  'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+  'easy_thumbnails.processors.filters',
 )
 
 #ZINNIA (BLOG) SETTINGS
@@ -418,7 +409,7 @@ CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 
 GROUPME_HOST = 'https://api.groupme.com/v3'
 GROUPME_TEST_BOT_ID = 'f87002597e8edc2d835585e3ff'
-GROUPME_TESTING = False   # sends all messages to the GroupMe group with id GROUPME_TEST_BOT_ID instead of to the real receivers
+GROUPME_TESTING = False  # sends all messages to the GroupMe group with id GROUPME_TEST_BOT_ID instead of to the real receivers
 
 LEAGUEVINE_HOST = "https://api.leaguevine.com"
 LEAGUEVINE_TOKEN_URL = "https://www.leaguevine.com"
@@ -427,23 +418,23 @@ LEAGUEVINE_TOKEN_URL = "https://www.leaguevine.com"
 
 
 if ON_HEROKU:
-    #TWITTER
-    # get them by running  'heroku config' and put those env variables locally in local_settings.py!
-    TWITTER_OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
-    TWITTER_OAUTH_SECRET = os.environ['TWITTER_OAUTH_SECRET']
-    TWITTER_CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
-    TWITTER_CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
+  #TWITTER
+  # get them by running  'heroku config' and put those env variables locally in local_settings.py!
+  TWITTER_OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
+  TWITTER_OAUTH_SECRET = os.environ['TWITTER_OAUTH_SECRET']
+  TWITTER_CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
+  TWITTER_CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
 
-    #flickr
-    FLICKR_API_KEY = os.environ['FLICKR_API_KEY']
-    FLICKR_API_SECRET = os.environ['FLICKR_API_SECRET']
+  #flickr
+  FLICKR_API_KEY = os.environ['FLICKR_API_KEY']
+  FLICKR_API_SECRET = os.environ['FLICKR_API_SECRET']
 
-    # # leaguevine
-    # LEAGUEVINE_CLIENT_ID = os.environ['LEAGUEVINE_CLIENT_ID']
-    # LEAGUEVINE_CLIENT_PWD = os.environ['LEAGUEVINE_CLIENT_PWD']
-    #
-    # # groupme
-    # GROUPME_TOKEN = os.environ['GROUPME_TOKEN']
+  # # leaguevine
+  # LEAGUEVINE_CLIENT_ID = os.environ['LEAGUEVINE_CLIENT_ID']
+  # LEAGUEVINE_CLIENT_PWD = os.environ['LEAGUEVINE_CLIENT_PWD']
+  #
+  # # groupme
+  # GROUPME_TOKEN = os.environ['GROUPME_TOKEN']
 
 
 
@@ -453,113 +444,113 @@ if ON_HEROKU:
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': ('%(asctime)s [%(process)d] [%(levelname)s] ' +
-                       'pathname=%(pathname)s lineno=%(lineno)s ' +
-                       'funcname=%(funcName)s %(message)s'),
-            'datefmt': '%Y-%m-%d %H:%M:%S'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
+  'version': 1,
+  'disable_existing_loggers': False,
+  'formatters': {
+    'verbose': {
+      'format': ('%(asctime)s [%(process)d] [%(levelname)s] ' +
+                 'pathname=%(pathname)s lineno=%(lineno)s ' +
+                 'funcname=%(funcName)s %(message)s'),
+      'datefmt': '%Y-%m-%d %H:%M:%S'
     },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
+    'simple': {
+      'format': '%(levelname)s %(message)s'
     },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'console': {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        "django": {
-            "handlers": ["console"],
-            "level": 'INFO',
-        },
-        "testlog": {
-            "handlers": ["console"],
-            "level": 'DEBUG',
-        },
-        "django.db.backends": {
-            "handlers": ["console"],
-            'level': 'DEBUG',
-        }
-
+  },
+  'filters': {
+    'require_debug_false': {
+      '()': 'django.utils.log.RequireDebugFalse'
     }
+  },
+  'handlers': {
+    'mail_admins': {
+      'level': 'ERROR',
+      'filters': ['require_debug_false'],
+      'class': 'django.utils.log.AdminEmailHandler'
+    },
+    'console': {
+      "level": "INFO",
+      "class": "logging.StreamHandler",
+      'formatter': 'verbose'
+    },
+  },
+  'loggers': {
+    'django.request': {
+      'handlers': ['mail_admins'],
+      'level': 'ERROR',
+      'propagate': True,
+    },
+    "django": {
+      "handlers": ["console"],
+      "level": 'INFO',
+    },
+    "testlog": {
+      "handlers": ["console"],
+      "level": 'DEBUG',
+    },
+    "django.db.backends": {
+      "handlers": ["console"],
+      'level': 'DEBUG',
+    }
+
+  }
 }
 
 if ON_HEROKU:
-    PIPELINE_YUGLIFY_BINARY = os.path.join(os.getcwd(),  '.heroku/python/bin/yuglify')
-    PIPELINE_LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
+  PIPELINE_YUGLIFY_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/yuglify')
+  PIPELINE_LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
 else:
-    PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
-    PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
+  PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
+  PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
 
 PIPELINE_COMPILERS = (
   'pipeline.compilers.less.LessCompiler',
 )
 
+PIPELINE_DISABLE_WRAPPER = True
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 
-
 PIPELINE_CSS = {
-    'core': {
-        'source_filenames': (
-          'bootstrap-custom.less',
-          'animate.css/animate.css',
-          'fontawesome/css/font-awesome.css',
-          'website/css/*.less',
-        ),
-        'output_filename': 'css/core.css',
-    },
+  'core': {
+    'source_filenames': (
+      'bootstrap-custom.less',
+      'animate.css/animate.css',
+      'fontawesome/css/font-awesome.css',
+      'website/css/*.less',
+    ),
+    'output_filename': 'css/core.css',
+  },
 }
 
 PIPELINE_JS = {
-    'core': {
-        'source_filenames': (
-          'jquery/dist/jquery.js',
-          'bootstrap/dist/js/bootstrap.js',
-          'website/js/CrunchSite.js',
-        ),
-        'output_filename': 'js/core.js',
-    }
+  'core': {
+    'source_filenames': (
+      'jquery/dist/jquery.js',
+      'bootstrap/dist/js/bootstrap.js',
+      'website/js/CrunchSite.js',
+    ),
+    'output_filename': 'js/core.js',
+  }
 }
 
 
 #CKEDITOR
 CKEDITOR_SETTINGS = {
-    'language': '{{ language }}',
-    'toolbar': 'CMS',
-    'skin': 'moono',
-    'extraAllowedContent': '*(*)',
-    'stylesSet': [
-      {"name": "Italic", "element": "i"},
-      {"name": "Bold", "element": "strong"},
-      {"name": "Section", "element": "section"},
-    ]
+  'language': '{{ language }}',
+  'toolbar': 'CMS',
+  'skin': 'moono',
+  'extraAllowedContent': '*(*)',
+  'stylesSet': [
+    {"name": "Italic", "element": "i"},
+    {"name": "Bold", "element": "strong"},
+    {"name": "Section", "element": "section"},
+  ]
 }
 
 
 # use local_settings when available
 try:
-    from local_settings import *
+  from local_settings import *
 except ImportError:
-    pass
+  pass
