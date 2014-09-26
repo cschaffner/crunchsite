@@ -56,10 +56,21 @@ LINE 1: ...tent_template", "zinnia_entry"."detail_template", "zinnia_en...
 follow instructions here:
 https://github.com/Fantomas42/django-blog-zinnia/issues/115
 
+that results in a strange migration procedure:
+1. comment out SOUTH_MIGRATION_MODULES in www/settings.py
+2. ./manage.py syncdb --migrate
+3. comment in SOUTH_MIGRATION_MODULES in www/settings.py
+4. ./manage.py migrate --delete-ghost-migrations
+
+It's not completely clear to me how future migrations in zinnia will be applied...
+
+
 4. Getting errors:
 Menu AuthorMenu cannot be loaded. Please, make sure all its urls exist and can be resolved.
 unclear:
 https://github.com/django-blog-zinnia/cmsplugin-zinnia#tips-for-using-the-apphook
+also, make sure the Zinnia Webhook is attached somewhere and that page is published!
+
 
 5. Getting Errors about comments.comments, follow
 https://github.com/Fantomas42/django-blog-zinnia/issues/352
