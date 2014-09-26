@@ -11,7 +11,7 @@ if 'ON_HEROKU' in os.environ:
     DEBUG = os.environ.get('DEBUG', False) # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
     SITE_ID = 1 # crunchsite.herokuapp.com
 else:
-    DEBUG = False
+    DEBUG = True
     SITE_ID = 1 # crunchsite.herokuapp.com
     # SITE_ID = 2 # 127.0.0.1:8000
 
@@ -161,7 +161,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'cms.context_processors.cms_settings',
     'sekizai.context_processors.sekizai',
-    # 'zinnia.context_processors.version',
+    'zinnia.context_processors.version',
     # Required by allauth template tags
     "django.core.context_processors.request",
     # allauth specific context processors
@@ -342,7 +342,8 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.comments',
+    'django_comments',
+    # 'django.contrib.comments',
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -350,6 +351,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'pipeline',
     'cms',
+    'tagging',
     'mptt',
     'menus',
     'south',
@@ -386,6 +388,8 @@ INSTALLED_APPS = (
     'team',
     'localflavor',
     'import_export',
+    'zinnia',
+    'cmsplugin_zinnia',
 )
 
 THUMBNAIL_HIGH_RESOLUTION = True
@@ -399,9 +403,12 @@ THUMBNAIL_PROCESSORS = (
 
 #ZINNIA (BLOG) SETTINGS
 ZINNIA_AUTO_CLOSE_COMMENTS_AFTER = 0
-#never got this to work, a pity.
-#ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
+# hmmm, migrate does not work here...
+ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
 
+SOUTH_MIGRATION_MODULES = {
+    'zinnia': 'migrations.zinnia',
+}
 
 RECAPTCHA_PUBLIC_KEY = '6Lclf-wSAAAAABiYzvnSKXBjOKf1ENPA4B5h5ZnC'
 RECAPTCHA_PRIVATE_KEY = '6Lclf-wSAAAAAKUfTJwkd_LhotOQ7tLYtFs5-WZx'

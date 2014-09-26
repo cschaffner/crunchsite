@@ -49,6 +49,23 @@ for page in Page.objects.filter(template__iendswith='html'):
     page.save()
 
 
+3. Getting the error
+column zinnia_entry.content_placeholder_id does not exist
+LINE 1: ...tent_template", "zinnia_entry"."detail_template", "zinnia_en...
+
+follow instructions here:
+https://github.com/Fantomas42/django-blog-zinnia/issues/115
+
+4. Getting errors:
+Menu AuthorMenu cannot be loaded. Please, make sure all its urls exist and can be resolved.
+unclear:
+https://github.com/django-blog-zinnia/cmsplugin-zinnia#tips-for-using-the-apphook
+
+5. Getting Errors about comments.comments, follow
+https://github.com/Fantomas42/django-blog-zinnia/issues/352
+and comments out
+ # 'django.contrib.comments',
+in the applications, use newer app django_comments instead.
 
 
 

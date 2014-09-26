@@ -13,10 +13,9 @@ urlpatterns = i18n_patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^', include('cms.urls')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    # url(r'^news/', include('zinnia.urls'), name='zinnia'),
+    url(r'^comments/', include('django_comments.urls')),
 )
-
 
 
 #favicon and robots.txt shut mail up patterns
@@ -32,3 +31,8 @@ if settings.DEBUG:
     url(r'', include('django.contrib.staticfiles.urls')),
   ) + urlpatterns
 
+
+urlpatterns += patterns(
+    '',
+    url(r'^', include('cms.urls')),
+)
