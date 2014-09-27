@@ -21,7 +21,7 @@ if [ -f bin/install_nodejs ]; then
 fi
 
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
-python crunchsite/manage.py syncdb --noinput
-python crunchsite/manage.py migrate --noinput
+# python crunchsite/manage.py syncdb --noinput
+# python crunchsite/manage.py migrate --noinput
 
 echo "-----> Post-compile done"

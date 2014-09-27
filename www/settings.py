@@ -11,7 +11,7 @@ if 'ON_HEROKU' in os.environ:
     DEBUG = os.environ.get('DEBUG', False)  # if DEBUG exists on Heroku, use DEBUG mode, otherwise not
     SITE_ID = 1  # crunchsite.herokuapp.com
 else:
-    DEBUG = True
+    DEBUG = False
     SITE_ID = 1 # crunchsite.herokuapp.com
     # SITE_ID = 2 # 127.0.0.1:8000
 
@@ -79,10 +79,13 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-  'django.contrib.staticfiles.finders.FileSystemFinder',
-  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-  'django.contrib.staticfiles.finders.DefaultStorageFinder',
+  # 'django.contrib.staticfiles.finders.FileSystemFinder',
+  # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+  # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+  'pipeline.finders.FileSystemFinder',
+  'pipeline.finders.AppDirectoriesFinder',
   'pipeline.finders.PipelineFinder',
+  'pipeline.finders.CachedFileFinder'
 )
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
