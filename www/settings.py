@@ -94,7 +94,8 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = 'staticfiles'
 # os.path.join(PROJECT_PATH, "static")
 STATIC_URL = "/static/"
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
@@ -532,6 +533,8 @@ PIPELINE_JS = {
       'jquery/dist/jquery.js',
       'bootstrap/dist/js/bootstrap.js',
       'website/js/CrunchSite.js',
+      'admin/js/core.js',
+      # 'admin/js/SelectFilter2.js',
     ),
     'output_filename': 'js/core.js',
   }
