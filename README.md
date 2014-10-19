@@ -71,6 +71,8 @@ unclear:
 https://github.com/django-blog-zinnia/cmsplugin-zinnia#tips-for-using-the-apphook
 also, make sure the Zinnia Webhook is attached somewhere and that page is published!
 
+Also, in Django CMS 3, all AppHooks needs to have an "Application instance name" to be "zinnia"
+
 
 5. Getting Errors about comments.comments, follow
 https://github.com/Fantomas42/django-blog-zinnia/issues/352
