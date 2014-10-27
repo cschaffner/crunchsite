@@ -11,44 +11,52 @@
         <h1>Member: {{ instance }}</h1>
         {% endrender_model_block %}
 
-        <h2>Jobs</h2>
-        {% for job in object.jobs.all %}
-            <div class="job">
-                {% render_model_block job %}
-                {{ instance.get_job_display }}: {{ instance.start_date }} - {{ instance.end_date }}
-                {% endrender_model_block %}
-            </div>
-        {% endfor %}
+        {% if object.jobs.all %}
+            <h2>Jobs</h2>
+            {% for job in object.jobs.all %}
+                <div class="job">
+                    {% render_model_block job %}
+                    {{ instance.get_job_display }}: {{ instance.start_date }} - {{ instance.end_date }}
+                    {% endrender_model_block %}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-        <h2>Teams</h2>
-        {% for teammember in object.teammember_set.all %}
-            <div class="team">
-                {% render_model_block teammember %}
-                    {{ instance.get_status_display }} of
-                    <a href="{% url 'team:team_detail' instance.team.pk %}">{{ instance.team.name }}</a>
-                {% endrender_model_block %}
-            </div>
-        {% endfor %}
+        {% if object.teammember_set.all %}
+            <h2>Teams</h2>
+            {% for teammember in object.teammember_set.all %}
+                <div class="team">
+                    {% render_model_block teammember %}
+                        {{ instance.get_status_display }} of
+                        <a href="{% url 'team:team_detail' instance.team.pk %}">{{ instance.team.name }}</a>
+                    {% endrender_model_block %}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-        <h2>Tournaments</h2>
-        {% for tournamentteam in object.tournamentteam_set.all %}
-            <div class="tournament">
-                {% render_model_block tournamentteam %}
-                {{ instance.tournament.start_date }} -
-                    <a href="{% url 'team:tournamentteam_detail' instance.pk %}">{{ instance.tournament.name }}</a>,
-                    in {{ instance.tournament.city }} {{ instance.tournament.country.name }}
-                {% endrender_model_block %}
-            </div>
-        {% endfor %}
+        {% if object.tournamentteam_set.all %}
+            <h2>Tournaments</h2>
+            {% for tournamentteam in object.tournamentteam_set.all %}
+                <div class="tournament">
+                    {% render_model_block tournamentteam %}
+                    {{ instance.tournament.start_date }} -
+                        <a href="{% url 'team:tournamentteam_detail' instance.pk %}">{{ instance.tournament.name }}</a>,
+                        in {{ instance.tournament.city }} {{ instance.tournament.country.name }}
+                    {% endrender_model_block %}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-        <h2>Competitions</h2>
-        {% for competitionteam in object.competitionteam_set.all %}
-            <div class="competition">
-                {% render_model_block competitionteam %}
-                    <a href="{% url 'team:competitionteam_detail' instance.pk %}">{{ instance }}</a>
-                {% endrender_model_block %}
-            </div>
-        {% endfor %}
+        {% if object.competitionteam_set.all %}
+            <h2>Competitions</h2>
+            {% for competitionteam in object.competitionteam_set.all %}
+                <div class="competition">
+                    {% render_model_block competitionteam %}
+                        <a href="{% url 'team:competitionteam_detail' instance.pk %}">{{ instance }}</a>
+                    {% endrender_model_block %}
+                </div>
+            {% endfor %}
+        {% endif %}
 
 
         <h2>Description</h2>

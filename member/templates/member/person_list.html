@@ -16,7 +16,8 @@
             <h1>People</h1>
         <ul>
         {% for person in object_list %}
-            <li><a href="{% url 'member:detail' person.id %}">{{ person }}</a></li>
+            <li><a href="{% url 'member:detail' person.id %}">{{ person.first_name }}
+            {% if user.is_authenticated %}{{ person.last_name }}{% endif %}</a></li>
         {% empty %}
             <li>No people yet.</li>
         {% endfor %}

@@ -176,6 +176,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 MIDDLEWARE_CLASSES = (
+  'django.middleware.cache.UpdateCacheMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -188,7 +189,6 @@ MIDDLEWARE_CLASSES = (
   'cms.middleware.toolbar.ToolbarMiddleware',
   'django.middleware.transaction.TransactionMiddleware',
   # 'reversion.middleware.RevisionMiddleware',
-  'django.middleware.cache.UpdateCacheMiddleware',
   'django.middleware.common.CommonMiddleware',
   'django.middleware.cache.FetchFromCacheMiddleware',
 )

@@ -20,7 +20,10 @@
         {% for competitionteammember in object.competitionteammember_set.all %}
             <div class="player">
                 {% render_model_block competitionteammember %}
-                {{ instance.get_status_display }} - {{ instance.member.first_name }} {{ instance.member.last_name }}
+                    <span class="label label-default">{{ instance.get_status_display }}</span>
+                    {% with instance.member as person %}
+                        {% include 'member/person_detail_fragment.html' %}
+                    {% endwith %}
                 {% endrender_model_block %}
             </div>
         {% endfor %}

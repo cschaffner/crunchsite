@@ -15,31 +15,38 @@
         {% for teammember in object.teammember_set.all %}
             <div class="player">
                 {% render_model_block teammember %}
-                {{ instance.get_status_display }} - {{ instance.member.first_name }} {{ instance.member.last_name }}
+                    <span class="label label-default">{{ instance.get_status_display }}</span>
+                    {% with instance.member as person %}
+                        {% include 'member/person_detail_fragment.html' %}
+                    {% endwith %}
                 {% endrender_model_block %}
             </div>
         {% endfor %}
 
-        <h2>Tournament{{ object.tournamentteam_set.count|pluralize }}</h2>
-        {% for tournamentteam in object.tournamentteam_set.all %}
-            <div class="tournament">
-                {% render_model_block tournamentteam %}
-                {{ instance.tournament.start_date }} -
-                    <a href="{% url 'team:tournamentteam_detail' instance.pk %}">{{ instance.tournament.name }}</a>,
-                    in {{ instance.tournament.city }} {{ instance.tournament.country.name }}
-                {% endrender_model_block %}
-            </div>
-        {% endfor %}
+        {% if object.tournamentteam_set.all %}
+            <h2>Tournament{{ object.tournamentteam_set.count|pluralize }}</h2>
+            {% for tournamentteam in object.tournamentteam_set.all %}
+                <div class="tournament">
+                    {% render_model_block tournamentteam %}
+                    {{ instance.tournament.start_date }} -
+                        <a href="{% url 'team:tournamentteam_detail' instance.pk %}">{{ instance.tournament.name }}</a>,
+                        in {{ instance.tournament.city }} {{ instance.tournament.country.name }}
+                    {% endrender_model_block %}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-        <h2>Dutch Competition{{ object.competitionteam_set.count|pluralize }}</h2>
-        {% for competitionteam in object.competitionteam_set.all %}
-            <div class="competition">
-                {% render_model_block competitionteam %}
-                    {{ instance.competition.day1 }}
-                    <a href="{% url 'team:competitionteam_detail' instance.pk %}">{{ instance.competition }}</a>
-                {% endrender_model_block %}
-            </div>
-        {% endfor %}
+        {% if object.competitionteam_set.all %}
+            <h2>Dutch Competition{{ object.competitionteam_set.count|pluralize }}</h2>
+            {% for competitionteam in object.competitionteam_set.all %}
+                <div class="competition">
+                    {% render_model_block competitionteam %}
+                        {{ instance.competition.day1 }}
+                        <a href="{% url 'team:competitionteam_detail' instance.pk %}">{{ instance.competition }}</a>
+                    {% endrender_model_block %}
+                </div>
+            {% endfor %}
+        {% endif %}
 
         <h2>Description</h2>
         {% render_placeholder object.description %}

@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+    <a href="{% url 'member:detail' person.id %}">
+    {{ person.first_name }} {{ person.last_name }}</a>
+{% else %}
+    {{ person.first_name }}
+{% endif %}
+
