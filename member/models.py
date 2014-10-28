@@ -15,6 +15,16 @@ def my_member_slotname(instance):
 
 User.profile = property(lambda u: Person.objects.get_or_create(user=u)[0])
 
+
+class Job(models.Model):
+    description = models.CharField(max_length=50)
+    email = models.EmailField(blank=True, null=True, unique=True, help_text='emails to this address will be forwarded to all members with this job')
+    bestuur = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.description
+
+
 class Person(models.Model):
     MALE = '1M'
     FEMALE = '2F'
@@ -80,9 +90,9 @@ class Person(models.Model):
                                           default=AGREE)
     iban = IBANField(blank=True, null=True)
     account_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='bank account in the name of')
+    jobs = models.ManyToManyField(Job, through='MemberJob')
 
     email = models.EmailField(blank=True, null=True)
-
 
     user = models.OneToOneField(User, related_name='profile', blank=True, null=True)
 
@@ -126,29 +136,30 @@ class Person(models.Model):
             raise ValidationError('If person is not member of another club, you have to leave NFB membership field blank.')
 
 
+
 class MemberJob(models.Model):
-    PLAYER = '1PL'
-    CHAIRMAN = '2CH'
-    TREASURER = '3TR'
-    SECRETARY = '4SE'
-    COMPETITION = '5CO'
-    GENERAL = '6GE'
-    YOUTH = '7YO'
-    ALUMNI = '99A'
-    JOB_CHOICE = (
-        (PLAYER, u'active player'),
-        (CHAIRMAN, u'chairman (bestuur)'),
-        (TREASURER, u'treasurer (bestuur)'),
-        (SECRETARY, u'secretary (bestuur)'),
-        (COMPETITION, u'competition officer (bestuur)'),
-        (GENERAL, u'general board member (bestuur)'),
-        (YOUTH, u'youth coordinator (bestuur)'),
-        (ALUMNI, u'alumni'),
-    )
-    job = models.CharField(max_length=3, choices=JOB_CHOICE, default=PLAYER)
+    # PLAYER = '1PL'
+    # CHAIRMAN = '2CH'
+    # TREASURER = '3TR'
+    # SECRETARY = '4SE'
+    # COMPETITION = '5CO'
+    # GENERAL = '6GE'
+    # YOUTH = '7YO'
+    # ALUMNI = '99A'
+    # JOB_CHOICE = (
+    #     (PLAYER, u'active player'),
+    #     (CHAIRMAN, u'chairman (bestuur)'),
+    #     (TREASURER, u'treasurer (bestuur)'),
+    #     (SECRETARY, u'secretary (bestuur)'),
+    #     (COMPETITION, u'competition officer (bestuur)'),
+    #     (GENERAL, u'general board member (bestuur)'),
+    #     (YOUTH, u'youth coordinator (bestuur)'),
+    #     (ALUMNI, u'alumni'),
+    # )
+    job = models.ForeignKey(Job)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    person = models.ForeignKey(Person, related_name='jobs')
+    person = models.ForeignKey(Person)
 
     def __unicode__(self):
-        return self.get_job_display()
+        return self.job.description

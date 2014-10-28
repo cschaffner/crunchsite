@@ -1,5 +1,5 @@
 from django.contrib import admin
-from member.models import Person, MemberJob
+from member.models import Person, MemberJob, Job
 from team.admin import TeamMemberInline
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
 from import_export.admin import ImportExportMixin
@@ -22,24 +22,31 @@ class PersonResource(ModelResource):
     #     assert isinstance(person.team_set, object)
     #     return list(person.team_set.values_list('pk', flat=True))
 
+
+
 class MemberJobAdmin(admin.ModelAdmin):
     model = MemberJob
     form = autocomplete_light.modelform_factory(MemberJob)
 
+#
+#
+# class MemberJobInline(admin.TabularInline):
+#     model = MemberJob
+#     form = autocomplete_light.modelform_factory(MemberJob)
+#
 
-class MemberJobInline(admin.TabularInline):
-    model = MemberJob
-    form = autocomplete_light.modelform_factory(MemberJob)
+class JobAdmin(admin.ModelAdmin):
+    model = Job
 
 
 class PersonAdmin(PlaceholderAdminMixin, ImportExportMixin, admin.ModelAdmin):
     resource_class = PersonResource
     list_display = ('__unicode__', 'gender', 'playing_level')
     list_filter = ('gender', 'playing_level')
-    inlines = [
-        TeamMemberInline,
-        MemberJobInline
-    ]
+    # inlines = [
+    #     TeamMemberInline,
+    #     MemberJobInline
+    # ]
     form = autocomplete_light.modelform_factory(Person)
 
     def jobs(self, instance):
@@ -47,6 +54,6 @@ class PersonAdmin(PlaceholderAdminMixin, ImportExportMixin, admin.ModelAdmin):
 
 
 
-
+admin.site.register(Job, JobAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(MemberJob, MemberJobAdmin)
