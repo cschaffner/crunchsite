@@ -534,7 +534,6 @@ PIPELINE_JS = {
       'bootstrap/dist/js/bootstrap.js',
       'website/js/CrunchSite.js',
       'admin/js/core.js',
-      # 'admin/js/SelectFilter2.js',
     ),
     'output_filename': 'js/core.js',
   }

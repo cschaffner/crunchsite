@@ -2,7 +2,7 @@
   border: 0;
 }
 .navbar .navbar-brand {
-  padding-top: 24px;
+  padding-top: 28px;
 }
 .navbar .main-nav a {
   font-family: 'Roboto', sans-serif;
@@ -17,7 +17,7 @@
   text-decoration: none;
 }
 .navbar .social-nav a:hover {
-  color: #31cbe7 !important;
+  color: #dd5151 !important;
 }
 #navsub {
   margin-bottom: 32px;
