@@ -79,13 +79,10 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-  # 'django.contrib.staticfiles.finders.FileSystemFinder',
-  # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
   'django.contrib.staticfiles.finders.DefaultStorageFinder',
-  'pipeline.finders.FileSystemFinder',
-  'pipeline.finders.AppDirectoriesFinder',
-  'pipeline.finders.PipelineFinder',
-  'pipeline.finders.CachedFileFinder'
+  'compressor.finders.CompressorFinder',
 )
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
@@ -94,8 +91,17 @@ MEDIA_URL = "/media/"
 STATIC_ROOT = 'staticfiles'
 # os.path.join(PROJECT_PATH, "static")
 STATIC_URL = "/static/"
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+# STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+
+if ON_HEROKU:
+    LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
+else:
+    LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
+    COMPRESS_PRECOMPILERS = (
+        ('text/less', os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc {infile} {outfile}')),
+    )
 
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
@@ -344,7 +350,8 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django.contrib.messages',
-    'pipeline',
+    # 'pipeline',
+    'compressor',
     'cms',
     'tagging',
     'mptt',
@@ -500,45 +507,45 @@ LOGGING = {
   }
 }
 
-if ON_HEROKU:
-  PIPELINE_YUGLIFY_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/yuglify')
-  PIPELINE_LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
-else:
-  PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
-  PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
-
-PIPELINE_COMPILERS = (
-  'pipeline.compilers.less.LessCompiler',
-)
-
-PIPELINE_DISABLE_WRAPPER = True
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-
-PIPELINE_CSS = {
-  'core': {
-    'source_filenames': (
-      'bootstrap-custom.less',
-      'animate.css/animate.css',
-      'fontawesome/css/font-awesome.css',
-      'website/css/*.less',
-    ),
-    'output_filename': 'css/core.css',
-  },
-}
-
-PIPELINE_JS = {
-  'core': {
-    'source_filenames': (
-      'jquery/dist/jquery.js',
-      'bootstrap/dist/js/bootstrap.js',
-      'website/js/CrunchSite.js',
-      'admin/js/core.js',
-      # 'admin/js/SelectFilter2.js',
-    ),
-    'output_filename': 'js/core.js',
-  }
-}
+# if ON_HEROKU:
+#   PIPELINE_YUGLIFY_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/yuglify')
+#   PIPELINE_LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
+# else:
+#   PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
+#   PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
+#
+# PIPELINE_COMPILERS = (
+#   'pipeline.compilers.less.LessCompiler',
+# )
+#
+# PIPELINE_DISABLE_WRAPPER = True
+# PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+# PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+#
+# PIPELINE_CSS = {
+#   'core': {
+#     'source_filenames': (
+#       'bootstrap-custom.less',
+#       'animate.css/animate.css',
+#       'fontawesome/css/font-awesome.css',
+#       'website/css/*.less',
+#     ),
+#     'output_filename': 'css/core.css',
+#   },
+# }
+#
+# PIPELINE_JS = {
+#   'core': {
+#     'source_filenames': (
+#       'jquery/dist/jquery.js',
+#       'bootstrap/dist/js/bootstrap.js',
+#       'website/js/CrunchSite.js',
+#       'admin/js/core.js',
+#       # 'admin/js/SelectFilter2.js',
+#     ),
+#     'output_filename': 'js/core.js',
+#   }
+# }
 
 
 #CKEDITOR

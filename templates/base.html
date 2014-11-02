@@ -1,5 +1,5 @@
 {% load cms_tags staticfiles sekizai_tags menu_tags %}
-{% load compressed %}
+{% load compress %}
 
 <!DOCTYPE html>
 <html>
@@ -7,11 +7,19 @@
     <title>{% block title %}Crunch Ultimate Frisbee Club{% endblock title %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% render_block "css" %}
-    {% compressed_css 'core' %}
+    {% compress css %}
+        <link type="text/less" rel="stylesheet" href="{% static 'bootstrap-custom.less' %}" charset="utf-8">
+        <link type="text/css" rel="stylesheet" href="{% static 'animate.css/animate.css' %}" charset="utf-8">
+        <link type="text/css" rel="stylesheet" href="{% static 'fontawesome/css/font-awesome.css' %}" charset="utf-8">
+        <link type="text/less" rel="stylesheet" href="{% static 'website/css/article.less' %}" charset="utf-8">
+        <link type="text/less" rel="stylesheet" href="{% static 'website/css/footer.less' %}" charset="utf-8">
+        <link type="text/less" rel="stylesheet" href="{% static 'website/css/global.less' %}" charset="utf-8">
+        <link type="text/less" rel="stylesheet" href="{% static 'website/css/hero.less' %}" charset="utf-8">
+        <link type="text/less" rel="stylesheet" href="{% static 'website/css/home.less' %}" charset="utf-8">
+        <link type="text/less" rel="stylesheet" href="{% static 'website/css/nav.less' %}" charset="utf-8">
+        <link type="text/less" rel="stylesheet" href="{% static 'website/css/typography.less' %}" charset="utf-8">
     {% block headercss %}{%  endblock %}
-
-
+    {% endcompress %}
 
 
   </head>
@@ -24,16 +32,19 @@
 
     {% include "include/_footer.html" %}
 
-    {% compressed_js 'core' %}
-    {% render_block "js" %}
-
-
-    <script type="text/javascript">
-      $(function(){
-        _crunchSite = new CrunchSite({});
-      });
-    </script>
-    {% block postjs %}{% endblock %}
+    {% compress js %}
+        # TODO: change the following location
+        <script type="text/javascript" src="{% static 'jquery/dist/jquery.js' %}" charset="utf-8"></script>
+        <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.js' %}" charset="utf-8"></script>
+        <script type="text/javascript" src="{% static 'website/js/CrunchSite.js' %}" charset="utf-8"></script>
+        <script type="text/javascript" src="{% static 'admin/js/core.js' %}" charset="utf-8"></script>
+        <script type="text/javascript">
+          $(function(){
+            _crunchSite = new CrunchSite({});
+          });
+        </script>
+        {% block postjs %}{% endblock %}
+    {% endcompress %}
 
 
 
