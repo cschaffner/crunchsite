@@ -54,8 +54,6 @@ column zinnia_entry.content_placeholder_id does not exist
 LINE 1: ...tent_template", "zinnia_entry"."detail_template", "zinnia_en...
 
 follow instructions here:
-https://github.com/Fantomas42/django-blog-zinnia/issues/115
-
 that results in a strange migration procedure:
 1. comment out SOUTH_MIGRATION_MODULES in www/settings.py
 2. ./manage.py syncdb --migrate
@@ -120,7 +118,7 @@ http://stackoverflow.com/questions/15237366/how-to-execute-a-sql-script-on-herok
 $ cat reset_all_team_data.sql | heroku pg:psql --app windmillwindupsite
 
 locally:
-$ psql -h localhost -d wwsite -f sqlscripts/reset_all_team_data.sql
+$ psql -h localhost -d crunchsite -f sqlscripts/reset_all_team_data.sql
 
 
 
@@ -141,3 +139,6 @@ $ heroku config:add ON_HEROKU=1
     EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 
+
+Django Compressor / Less / Heroku Installation instructions:
+http://marklmiddleton.com/2013/using-less-with-django-on-heroku/
