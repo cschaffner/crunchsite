@@ -15,7 +15,7 @@ if [ -f bin/install_nodejs ]; then
     bin/install_nodejs
 
     # PUT YOUR NPM INSTALL LINES HERE: (less and iced-coffee-script for example)
-    npm install -g yuglify
+    # npm install -g yuglify
     npm install -g less
     #npm install -g iced-coffee-script
 fi
