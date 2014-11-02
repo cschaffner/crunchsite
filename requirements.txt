@@ -21,6 +21,7 @@ django-bootstrap-form==3.1
 django-celery==3.1.10
 django-classy-tags==0.5.1
 django-cms==3.0.6
+django-compressor==1.4
 django-contrib-comments==1.5
 django-countries==2.1.2
 django-filer==0.9.6
