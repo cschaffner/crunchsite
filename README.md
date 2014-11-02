@@ -102,8 +102,8 @@ to pull the heroku database to the localhost (using the database wwsite)
 
 to push the local db to heroku, we first need to totally empty the heroku db:
 (be careful! Pushing should never be necessary)
-~ >heroku pg:reset HEROKU_POSTGRESQL_GRAY_URL
-~ >heroku pg:push wwsite HEROKU_POSTGRESQL_GRAY_URL
+~ >heroku pg:reset HEROKU_POSTGRESQL_AQUA_URL
+~ >heroku pg:push crunchsite HEROKU_POSTGRESQL_AQUA_URL
 
 to restore a dump locally:
 ~ >pg_restore --verbose --clean --no-acl -d wwsite DUMPFILE.dump
