@@ -139,3 +139,6 @@ $ heroku config:add ON_HEROKU=1
     EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 
+
+Django Compressor / Less / Heroku Installation instructions:
+http://marklmiddleton.com/2013/using-less-with-django-on-heroku/

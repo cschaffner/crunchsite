@@ -97,6 +97,9 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 if ON_HEROKU:
     LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
+    COMPRESS_PRECOMPILERS = (
+        ('text/less', os.path.join(os.getcwd(), '.heroku/python/bin/lessc {infile} {outfile}')),
+    )
 else:
     LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
     COMPRESS_PRECOMPILERS = (

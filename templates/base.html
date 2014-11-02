@@ -18,8 +18,9 @@
         <link type="text/less" rel="stylesheet" href="{% static 'website/css/home.less' %}" charset="utf-8">
         <link type="text/less" rel="stylesheet" href="{% static 'website/css/nav.less' %}" charset="utf-8">
         <link type="text/less" rel="stylesheet" href="{% static 'website/css/typography.less' %}" charset="utf-8">
-    {% block headercss %}{%  endblock %}
+        {% block headercss %}{%  endblock %}
     {% endcompress %}
+    {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
 
 
   </head>
@@ -45,6 +46,7 @@
         </script>
         {% block postjs %}{% endblock %}
     {% endcompress %}
+    {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
 
 
 
