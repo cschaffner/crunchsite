@@ -411,9 +411,9 @@ ZINNIA_AUTO_CLOSE_COMMENTS_AFTER = 0
 # hmmm, migrate does not work here...
 ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
 
-# SOUTH_MIGRATION_MODULES = {
-#     'zinnia': 'migrations.zinnia',
-# }
+SOUTH_MIGRATION_MODULES = {
+    'zinnia': 'migrations.zinnia',
+}
 
 RECAPTCHA_PUBLIC_KEY = '6Lclf-wSAAAAABiYzvnSKXBjOKf1ENPA4B5h5ZnC'
 RECAPTCHA_PRIVATE_KEY = '6Lclf-wSAAAAAKUfTJwkd_LhotOQ7tLYtFs5-WZx'
