@@ -8,7 +8,7 @@ PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 ON_HEROKU = False
 if 'ON_HEROKU' in os.environ:
     ON_HEROKU = True
-    HEROKU_DEBUG = os.environ.get('HEROKU_DEBUG', False)  # if HEROKU_DEBUG exists on Heroku, use DEBUG mode, otherwise not
+    DEBUG = os.environ.get('HEROKU_DEBUG', False)  # if HEROKU_DEBUG exists on Heroku, use DEBUG mode, otherwise not
     SITE_ID = 1  # crunchsite.herokuapp.com
 else:
     DEBUG = False
