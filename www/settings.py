@@ -223,15 +223,15 @@ if ON_HEROKU:
         'remove_failed': 4
       }
     },
-    'staticfiles': {
-      "BACKEND": "django_pylibmc.memcached.PyLibMCCache",
-      "TIMEOUT": 60 * 60 * 24 * 365,
-      'BINARY': True,
-      'OPTIONS': {
-        'tcp_nodelay': True,
-        'remove_failed': 4
-      }
-    }
+    # 'staticfiles': {
+    #   "BACKEND": "django_pylibmc.memcached.PyLibMCCache",
+    #   "TIMEOUT": 60 * 60 * 24 * 365,
+    #   'BINARY': True,
+    #   'OPTIONS': {
+    #     'tcp_nodelay': True,
+    #     'remove_failed': 4
+    #   }
+    # }
 
   }
 else:
