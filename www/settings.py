@@ -10,6 +10,8 @@ if 'ON_HEROKU' in os.environ:
     ON_HEROKU = True
     if os.environ.get('HEROKU_DEBUG', None): # if HEROKU_DEBUG exists on Heroku, use DEBUG mode, otherwise not
         DEBUG = True
+        if os.environ.get('COMPRESS_ENABLED', None):
+            COMPRESS_ENABLED = True
     else:
         DEBUG = False
     SITE_ID = 1  # crunchsite.herokuapp.com
@@ -109,6 +111,7 @@ else:
         ('text/less', os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc {infile} {outfile}')),
     )
 
+COMPRESS_ENABLED = True
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
 BASE_URL = u'http://crunchsite.herokuapp.com'
