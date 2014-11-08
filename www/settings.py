@@ -296,7 +296,7 @@ CMS_TEMPLATES = (
 )
 CMS_PERMISSION = True
 
-MAILINGLIST_URL = u'crunch-ultimate.net'  # all mailinglist addresses have to end in this URL
+MAILGUN_DOMAIN = u'crunch-ultimate.net'  # all mailinglist addresses have to end in this URL
 EMAIL_CONFIRMATION_DAYS = 100
 EMAIL_BCC = 'huebli@gmail.com'  # will be used as BCC address in all emails sent
 DEFAULT_FROM_EMAIL = 'webmaster@crunch-ultimate.net'
@@ -401,6 +401,7 @@ INSTALLED_APPS = (
     'import_export',
     'zinnia',
     'cmsplugin_zinnia',
+    'mailgun',
 )
 
 THUMBNAIL_HIGH_RESOLUTION = True
@@ -415,11 +416,11 @@ THUMBNAIL_PROCESSORS = (
 #ZINNIA (BLOG) SETTINGS
 ZINNIA_AUTO_CLOSE_COMMENTS_AFTER = 0
 # hmmm, migrate does not work here...
-ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
+# ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
 
-SOUTH_MIGRATION_MODULES = {
-    'zinnia': 'migrations.zinnia',
-}
+# SOUTH_MIGRATION_MODULES = {
+#     'zinnia': 'migrations.zinnia',
+# }
 
 RECAPTCHA_PUBLIC_KEY = '6Lclf-wSAAAAABiYzvnSKXBjOKf1ENPA4B5h5ZnC'
 RECAPTCHA_PRIVATE_KEY = '6Lclf-wSAAAAAKUfTJwkd_LhotOQ7tLYtFs5-WZx'

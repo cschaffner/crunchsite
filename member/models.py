@@ -18,7 +18,6 @@ User.profile = property(lambda u: Person.objects.get_or_create(user=u)[0])
 
 class Job(models.Model):
     description = models.CharField(max_length=50)
-    email = models.EmailField(blank=True, null=True, unique=True, help_text='emails to this address will be forwarded to all members with this job')
     bestuur = models.BooleanField(default=False)
 
     def __unicode__(self):

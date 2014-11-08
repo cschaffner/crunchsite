@@ -1,12 +1,10 @@
 from django.contrib import admin
-from django.contrib import messages
-
+from mailgun.admin import EmailInlineTeam
 from team.models import Team, Tournament, TournamentTeam, TeamMember, CompetitionTeam, Competition, \
                                 TournamentTeamMember, CompetitionTeamMember
 from member.models import Person
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
 import autocomplete_light
-import requests
 
 class TournamentAdmin(admin.ModelAdmin):
     pass
@@ -29,27 +27,11 @@ class CompetitionTeamMemberInline(admin.TabularInline):
 
 
 class TeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
-    actions = ['create_email_list', 'add_team_members_to_mailinglist']
+    fields = ['name']
     inlines = [
-        TeamMemberInline
+        TeamMemberInline,
+        EmailInlineTeam,
     ]
-
-    def create_email_list(self, request, queryset):
-        for team in queryset:
-            response = team.update_mailinglist_address()
-            if response.status_code == requests.codes.OK:
-                self.message_user(request, u'{0}: {1}'.format(team, response.content))
-            else:
-                self.message_user(request, u'{0}: {1}'.format(team, response.content), level=messages.ERROR)
-
-    def add_team_members_to_mailinglist(self, request, queryset):
-        for team in queryset:
-            response = team.add_team_members_to_mailinglist()
-            if response.status_code == requests.codes.OK:
-                self.message_user(request, u'{0}: {1}'.format(team, response.content))
-            else:
-                self.message_user(request, u'{0}: {1}'.format(team, response.content), level=messages.ERROR)
-
 
 class TournamentTeamAdmin(PlaceholderAdminMixin, admin.ModelAdmin):
     actions = ['import_team_roster']

@@ -33,111 +33,13 @@ class Team(models.Model):
     name = models.CharField(max_length=100)
     roster = models.ManyToManyField(Person, through='TeamMember')
     description = PlaceholderField(my_team_slotname)
-    mailinglist_address = models.EmailField(blank=True, null=True)
+
 
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('team:team_detail', args=[self.pk])
-
-    def clean(self):
-        # self.mailinglist_address has to end in settings.MAILINGLIST_URL
-        if self.mailinglist_address and self.mailinglist_address[-len(settings.MAILINGLIST_URL):] != settings.MAILINGLIST_URL:
-            raise ValidationError('Mailinglist email addresses have to end in {0}'.format(settings.MAILINGLIST_URL))
-
-        # check if mailinglist_address will be changed
-        if self.mailinglist_address is not None:
-            old_address = None
-            if self.id:
-                old_address = Team.objects.get(pk=self.id).mailinglist_address
-
-            if self.mailinglist_address != old_address:
-                response = self.update_mailinglist_address(old_address)
-                if response.status_code >= 400 or response.json()['address'] != self.mailinglist_address:
-                    self.mailinglist_address = old_address
-                    raise ValidationError('mailinglist adress could not been changed')
-
-
-
-    # def save(self, *args, **kwargs):
-    #     super(Team, self).save(*args, **kwargs)
-    #
-    #
-
-    def update_mailinglist_address(self, old_address=None):
-        """
-        returns a requests.Response() object
-        with status_code = 600 in case of ConnectionError to mailgun
-        with status_code = 200 if self.mailinglist_address is not set (nothing to do)
-        with status_code = 200 if old_address == self.mailinglist (nothing to do)
-
-        if old_address is set, it updates the mailgun mailinglist old_address to self.mailinglist_address
-        if old_address is not set, it creates a new mailgun mailinglist with address self.mailinglist_address
-
-        """
-        response = requests.Response()
-
-        if not self.mailinglist_address:
-            response.status_code = 200
-            response._content = u'mailinglist_address not set'
-            return response
-
-        if old_address == self.mailinglist_address:
-            response.status_code = 200
-            response._content = u'nothing to do'
-            return response
-
-        if not old_address:
-            # create mailinglist on mailgun
-            try:
-                response = requests.post(
-                    "https://api.mailgun.net/v2/lists",
-                    auth=('api', settings.MAILGUN_API_KEY),
-                    data={'address': '{0}'.format(self.mailinglist_address),
-                          'description': "{0} mailing list".format(self.name)})
-            except requests.ConnectionError:
-                response = requests.Response()
-                response.status_code = 600
-                response._content = u'could not connect to Mailgun'
-        else:
-            # update existing mailing list on mailgun
-            try:
-                #TODO: update instead!
-                response = requests.post(
-                    "https://api.mailgun.net/v2/lists",
-                    auth=('api', settings.MAILGUN_API_KEY),
-                    data={'address': '{0}'.format(self.mailinglist_address),
-                          'description': "{0} mailing list".format(self.name)})
-            except requests.ConnectionError:
-                response = requests.Response()
-                response.status_code = 600
-                response._content = u'could not connect to Mailgun'
-
-        return response
-
-
-    def add_team_members_to_mailinglist(self):
-        # collect teammembers to be added
-        members = []
-        for teammember in self.teammember_set.all():
-            members.append({
-                'address': '{0} <{1}>'.format(teammember.member, teammember.member.email),
-                'vars': {'gender': teammember.member.get_gender_display()},
-            })
-        try:
-            response = requests.post(
-                "https://api.mailgun.net/v2/lists/{0}/members.json".format(self.mailinglist_address),
-                auth=('api', settings.MAILGUN_API_KEY),
-                data={'subscribed': True,
-                      'members': json.dumps(members)},
-            )
-        except requests.ConnectionError:
-            response = requests.Response()
-            response.status_code = 600
-            response._content = u'could not connect to Mailgun'
-
-        return response
 
 
 class TeamMember(models.Model):

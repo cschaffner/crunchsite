@@ -5,6 +5,7 @@ from cms.admin.placeholderadmin import PlaceholderAdminMixin
 from import_export.admin import ImportExportMixin
 from import_export.resources import ModelResource
 from import_export import fields
+from mailgun.admin import EmailInlineJob
 import autocomplete_light
 
 class PersonResource(ModelResource):
@@ -37,6 +38,9 @@ class MemberJobAdmin(admin.ModelAdmin):
 
 class JobAdmin(admin.ModelAdmin):
     model = Job
+    inlines = [
+        EmailInlineJob,
+    ]
 
 
 class PersonAdmin(PlaceholderAdminMixin, ImportExportMixin, admin.ModelAdmin):
@@ -51,7 +55,6 @@ class PersonAdmin(PlaceholderAdminMixin, ImportExportMixin, admin.ModelAdmin):
 
     def jobs(self, instance):
         return instance.jobs.all()
-
 
 
 admin.site.register(Job, JobAdmin)
