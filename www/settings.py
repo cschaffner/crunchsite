@@ -13,7 +13,7 @@ if 'ON_HEROKU' in os.environ:
         if os.environ.get('COMPRESS_ENABLED', None):
             COMPRESS_ENABLED = True
     else:
-        DEBUG = True
+        DEBUG = False
     SITE_ID = 1  # crunchsite.herokuapp.com
 else:
     DEBUG = False
@@ -112,6 +112,13 @@ else:
     )
 
 COMPRESS_ENABLED = True
+
+# offline compression does not work with sekizai (which is required for Django CMS)
+# https://github.com/django-compressor/django-compressor/issues/351
+# https://www.merenbach.com/2013/04/04/a-blocking-issue/
+# at least not for now.
+COMPRESS_OFFLINE = False
+
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
 BASE_URL = u'http://crunchsite.herokuapp.com'
@@ -215,13 +222,17 @@ if ON_HEROKU:
 
   CACHES = {
     'default': {
-      'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
-      'TIMEOUT': 500,
-      'BINARY': True,
-      'OPTIONS': {
-        'tcp_nodelay': True,
-        'remove_failed': 4
-      }
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'BINARY': True,
+        'OPTIONS': {
+            'no_block': True,
+            'tcp_nodelay': True,
+            'tcp_keepalive': True,
+            'remove_failed': 4,
+            'retry_timeout': 2,
+            'dead_timeout': 10,
+            '_poll_timeout': 2000
+        }
     },
     # 'staticfiles': {
     #   "BACKEND": "django_pylibmc.memcached.PyLibMCCache",
@@ -236,25 +247,25 @@ if ON_HEROKU:
   }
 else:
   # disable caches for development
-  CACHES = {
-    'default': {
-      'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    }
-  }
-
-  # # or turn it on for testing
   # CACHES = {
-  # 'default': {
-  #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-  #     'LOCATION': 'unique-snowflake',
-  #     }
+  #   'default': {
+  #     'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+  #   }
   # }
 
-CACHE_MIDDLEWARE_ALIAS = 'default'
-CACHE_MIDDLEWARE_SECONDS = 0
-CACHE_MIDDLEWARE_KEY_PREFIX = ''
+  # # or turn it on for testing
+  CACHES = {
+  'default': {
+      'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+      'LOCATION': 'unique-snowflake',
+      }
+  }
 
-CMS_CACHE_DURATIONS = {'content': 60}
+# CACHE_MIDDLEWARE_ALIAS = 'default'
+# CACHE_MIDDLEWARE_SECONDS = 0
+# CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+# CMS_CACHE_DURATIONS = {'content': 60}
 
 # ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -288,7 +299,7 @@ LANGUAGES = [
 CMS_TEMPLATES = (
   ('cmstemplates/default_section.html', 'Default section'),
   ('cmstemplates/home.html', 'HOME'),
-  ('cmstemplates/faq.html', 'FAQ'),
+  # ('cmstemplates/faq.html', 'FAQ'),
   ('cmstemplates/thumbgrid.html', "Grid"),
   ('cmstemplates/message.html', 'Plain message'),
   ('cmstemplates/section_no_sidebar.html', 'CMS section without side bar'),

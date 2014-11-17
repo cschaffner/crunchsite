@@ -140,5 +140,12 @@ $ heroku config:add ON_HEROKU=1
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 
 
+You can put the heroku site to DEBUG mode by setting
+$ heroku config:set HEROKU_DEBUG=1
+to disable debug mode:
+$ heroku config:unset HEROKU_DEBUG
+
+
+
 Django Compressor / Less / Heroku Installation instructions:
 http://marklmiddleton.com/2013/using-less-with-django-on-heroku/
