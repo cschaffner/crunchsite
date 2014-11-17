@@ -1,4 +1,108 @@
 body.home {
 
 
+
+
+  #hero-home {
+    position: relative;
+    width: 100%;
+    text-align: center;
+
+    a {
+      width: 100px;
+      height: 100px;
+      display: block;
+      position: absolute;
+      z-index: 3;
+      border-radius: 50px;
+      border: 1px solid #fff;
+      text-align: center;
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #fff;
+        color: #de4f4f;
+      }
+
+      &.pos-1 {
+        left: 300px;
+        top: 180px;
+        padding-top: 16px;
+      }
+
+      &.pos-2 {
+        top: 100px;
+        right: 300px;
+        padding-top: 22px;
+      }
+
+      &.pos-3 {
+        right: 340px;
+        bottom: 60px;
+        padding-top: 24px;
+      }
+
+
+    }
+
+    img {
+      width: 400px;
+      height: 400px;
+
+      margin: 30px auto 30px auto;
+     }
+ }
+
+
+  .slider-container {
+    .slider {
+
+      ul.slides {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          width: 25%;
+          float: left;
+          overflow: hidden;
+          padding-right: 30px;
+
+          &:last-child {
+            padding-right: 0;
+          }
+
+          a {
+            display: block;
+            overflow: hidden;
+            height: 140px;
+            border-radius: 12px;
+
+            img {
+              width: 100%;
+            }
+          }
+
+          .slide-content {
+            h2 {
+              margin: 0; padding: 0;
+
+              a {
+                display: inline;
+                height: auto;
+                border-radius: none;
+                text-decoration: none;
+              }
+
+            }
+
+            p {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
 }

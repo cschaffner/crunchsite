@@ -96,7 +96,7 @@ start the server:
 
 
 to pull the heroku database to the localhost (using the database wwsite)
-~/Sites/windmillwindupsite > heroku pg:pull DATABASE_URL wwsite
+~/Sites/windmillwindupsite > heroku pg:pull DATABASE_URL crunchsite
 
 * Daily backups of the HEROKU database are now kept on Amazon S3 (via another heroku app)
 

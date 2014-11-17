@@ -8,28 +8,72 @@
 {% block base_content %}
 
 <div id="hero">
-   <div class="spotlight">
-     <div class="container">
-       <div class="row">
-         <div class="col-sm-4 pull-right">
-            <div class="cta">
-              <h1>This is awesome</h1>
-              <h2>as is this yo</h2>
-              <a class="btn btn-info" href="#">Sign up</a>
-            </div>
-         </div>
-       </div>
-     </div>
-   </div>
+  <div id="hero-home">
+    <img src="{% static "website/img/huisjes.svg" %}" />
+    <a class="pos-1" href="#">What is Ultimate frisbee?</a>
+    <a class="pos-2" href="#">Join<br>Crunch</a>
+    <a class="pos-3" href="#">Jeugd speler?</a>
+  </div>
+
 </div>
 
+<div class="ctas">
+  <div class="container">
+    <div class="col-md-4 cta-item">
+      <a href="#">
+        <i class="fa fa-users"></i>
+        Register your account
+      </a>
+    </div>
+    <div class="col-md-4 cta-item">
+      <a href="#">
+        <i class="fa fa-calendar"></i>
+        <em>21 nov 2014</em>
+        <strong>ALV</strong>
+      </a>
+
+    </div>
+    <div class="col-md-4 cta-item">
+      <a href="#">
+        <i class="fa fa-check-circle"></i>
+        <em>Field status</em>
+        <strong>Approved <span>10 nov 16:32</span></strong>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<br><br>
 <div class="container">
   <div class="row">
-    <div class="col-sm-8">
-      {% placeholder content %}
+    <div class="col-sm-12 opener">
+      {% placeholder opener %}
     </div>
-    <div class="col-sm-4 sidebar">
-      {% placeholder sidebar %}
+  </div>
+</div>
+
+
+<div class="container">
+  <h2>Latest news</h2>
+  <div class="row">
+    <div class="col-sm-12">
+      {% placeholder news %}
+    </div>
+  </div>
+</div>
+
+<div class="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="banner-img" style="background-image: url('{% static "website/img/temp.jpg" %}');">
+        </div>
+
+        <h3>Crunch jeugd team zoekt spelers!</h3>
+        <p>Elke dinsdag en donderdag van 18:00-19:30 sportpark Drieburg. Doe ook Mee!</p>
+        <a class="btn btn-primary">Info</a>
+      </div>
     </div>
   </div>
 </div>
