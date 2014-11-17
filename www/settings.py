@@ -230,8 +230,6 @@ if ON_HEROKU:
             'tcp_keepalive': True,
             'remove_failed': 4,
             'retry_timeout': 2,
-            'dead_timeout': 10,
-            '_poll_timeout': 2000
         }
     },
     # 'staticfiles': {
