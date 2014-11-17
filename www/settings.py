@@ -13,7 +13,7 @@ if 'ON_HEROKU' in os.environ:
         if os.environ.get('COMPRESS_ENABLED', None):
             COMPRESS_ENABLED = True
     else:
-        DEBUG = False
+        DEBUG = True
     SITE_ID = 1  # crunchsite.herokuapp.com
 else:
     DEBUG = False
