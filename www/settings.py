@@ -25,6 +25,9 @@ ADMINS = (
   ('Les Kleuver', 'les.kleuver@gmail.com'),
 )
 
+
+DEBUG = True
+
 MANAGERS = ADMINS
 SEND_BROKEN_LINK_EMAILS = False
 CELERY_SEND_TASK_ERROR_EMAILS = True
@@ -526,48 +529,7 @@ LOGGING = {
   }
 }
 
-# if ON_HEROKU:
-#   PIPELINE_YUGLIFY_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/yuglify')
-#   PIPELINE_LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
-# else:
-#   PIPELINE_YUGLIFY_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/yuglify/bin/yuglify')
-#   PIPELINE_LESS_BINARY = os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc')
-#
-# PIPELINE_COMPILERS = (
-#   'pipeline.compilers.less.LessCompiler',
-# )
-#
-# PIPELINE_DISABLE_WRAPPER = True
-# PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-# PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-#
-# PIPELINE_CSS = {
-#   'core': {
-#     'source_filenames': (
-#       'bootstrap-custom.less',
-#       'animate.css/animate.css',
-#       'fontawesome/css/font-awesome.css',
-#       'website/css/*.less',
-#     ),
-#     'output_filename': 'css/core.css',
-#   },
-# }
-#
-# PIPELINE_JS = {
-#   'core': {
-#     'source_filenames': (
-#       'jquery/dist/jquery.js',
-#       'bootstrap/dist/js/bootstrap.js',
-#       'website/js/CrunchSite.js',
-#       'admin/js/core.js',
-#       # 'admin/js/SelectFilter2.js',
-#     ),
-#     'output_filename': 'js/core.js',
-#   }
-# }
 
-
-#CKEDITOR
 CKEDITOR_SETTINGS = {
   'language': '{{ language }}',
   'toolbar': 'CMS',
