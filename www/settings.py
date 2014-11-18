@@ -111,7 +111,7 @@ else:
         ('text/less', os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc {infile} {outfile}')),
     )
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 # offline compression does not work with sekizai (which is required for Django CMS)
 # https://github.com/django-compressor/django-compressor/issues/351
