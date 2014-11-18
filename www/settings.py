@@ -114,7 +114,7 @@ else:
         ('text/less', os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc {infile} {outfile}')),
     )
 
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 
 # offline compression does not work with sekizai (which is required for Django CMS)
 # https://github.com/django-compressor/django-compressor/issues/351
@@ -247,20 +247,20 @@ if ON_HEROKU:
 
   }
 else:
-  # disable caches for development
-  # CACHES = {
-  #   'default': {
-  #     'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-  #   }
-  # }
-
-  # # or turn it on for testing
-  CACHES = {
-  'default': {
-      'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-      'LOCATION': 'unique-snowflake',
+  if DEBUG:
+    CACHES = {
+       'default': {
+         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
       }
-  }
+    }
+  else:
+    # # or turn it on for testing
+    CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        }
+    }
 
 # CACHE_MIDDLEWARE_ALIAS = 'default'
 # CACHE_MIDDLEWARE_SECONDS = 0
