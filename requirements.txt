@@ -7,7 +7,7 @@ beautifulsoup4==4.3.2
 billiard==3.3.0.19
 boto==2.34.0
 celery==3.1.17
--e git://github.com/asmaps/cmsplugin-contact.git@823db4266580db3996728e9f8cb9f4618a511b18#egg=cmsplugin_contact-master
+-e git://github.com/asmaps/cmsplugin-contact.git@823db4266580db3996728e9f8cb9f4618a511b18#egg=cmsplugin_contact-origin/HEAD
 cmsplugin-filer==0.10.1
 cmsplugin-zinnia==0.6
 diff-match-patch==20121119
@@ -30,6 +30,7 @@ django-import-export==0.2.3
 django-localflavor==1.0
 django-mptt==0.6.1
 django-polymorphic==0.5.5
+django-pylibmc==0.5.0
 django-pylibmc-sasl==0.2.4
 django-reversion==1.8.0
 django-s3-folder-storage==0.2
