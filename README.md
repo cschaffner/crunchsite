@@ -56,11 +56,31 @@ LINE 1: ...tent_template", "zinnia_entry"."detail_template", "zinnia_en...
 follow instructions here:
 https://github.com/Fantomas42/django-blog-zinnia/issues/115
 robertour commented on 8 Nov 2013:
-
 $ python manage.py schemamigration zinnia --auto
 $ python manage.py migrate zinnia
 
 It's not completely clear to me how future migrations in zinnia will be applied...
+
+This also does not work on heroku, where the migrations cannot be written to the zinnia package once the code is
+uploaded. So, we as indicated in the github thread above, I created another migration module for zinnia. It's
+used by putting the following into settings.py
+SOUTH_MIGRATION_MODULES = {
+    'zinnia': 'migrations.zinnia',
+}
+* I first commented out
+ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
+and created a new initial migration for zinnia, resulting in
+migrations/zinnia/0001_initialy.py
+* Then I commented in the line above again
+* and created a new schemamigration for zinnia, resulting in
+migrations/zinnia/0002_initialy.py
+
+By committing those as part of the project, I could now apply those migrations (in particular the second one)
+also on heroku, thereby deleting all the ghost-migrations from the original zinnia project.
+I guess in the future, I will have to insert all future zinnia migrations into my own
+migrations/zinnia/...
+folder.
+
 
 
 4. Getting errors:
