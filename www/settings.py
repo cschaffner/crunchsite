@@ -248,6 +248,7 @@ if ON_HEROKU:
   }
 else:
   if DEBUG:
+  # disable caches for development
     CACHES = {
        'default': {
          'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
@@ -260,6 +261,13 @@ else:
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
         }
+    }
+    # or turn file-cache on for testing
+    CACHES = {
+      'default': {
+          'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+          'LOCATION': '/var/tmp/django_cache',
+      }
     }
 
 # CACHE_MIDDLEWARE_ALIAS = 'default'
