@@ -7,7 +7,7 @@ beautifulsoup4==4.3.2
 billiard==3.3.0.19
 boto==2.34.0
 celery==3.1.17
--e git://github.com/asmaps/cmsplugin-contact.git@823db4266580db3996728e9f8cb9f4618a511b18#egg=cmsplugin_contact-origin/HEAD
+-e git://github.com/asmaps/cmsplugin-contact.git@823db4266580db3996728e9f8cb9f4618a511b18#egg=cmsplugin_contact-master
 cmsplugin-filer==0.10.1
 cmsplugin-zinnia==0.6
 diff-match-patch==20121119
