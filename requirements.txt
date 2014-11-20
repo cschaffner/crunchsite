@@ -64,6 +64,7 @@ pyparsing==2.0.2
 pystache==0.5.4
 python-openid==2.2.5
 pytz==2014.9
+recaptcha-client==1.0.6
 requests==2.4.3
 requests-oauthlib==0.4.2
 six==1.8.0
