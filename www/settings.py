@@ -263,12 +263,12 @@ else:
         }
     }
     # or turn file-cache on for testing
-    CACHES = {
-      'default': {
-          'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-          'LOCATION': '/var/tmp/django_cache',
-      }
-    }
+    # CACHES = {
+    #   'default': {
+    #       'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+    #       'LOCATION': '/var/tmp/django_cache',
+    #   }
+    # }
 
 # CACHE_MIDDLEWARE_ALIAS = 'default'
 # CACHE_MIDDLEWARE_SECONDS = 0
@@ -436,7 +436,7 @@ THUMBNAIL_PROCESSORS = (
 #ZINNIA (BLOG) SETTINGS
 ZINNIA_AUTO_CLOSE_COMMENTS_AFTER = 0
 # hmmm, migrate does not work here...
-# ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
+ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
 
 # SOUTH_MIGRATION_MODULES = {
 #     'zinnia': 'migrations.zinnia',

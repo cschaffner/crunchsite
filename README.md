@@ -54,11 +54,11 @@ column zinnia_entry.content_placeholder_id does not exist
 LINE 1: ...tent_template", "zinnia_entry"."detail_template", "zinnia_en...
 
 follow instructions here:
-that results in a strange migration procedure:
-1. comment out SOUTH_MIGRATION_MODULES in www/settings.py
-2. ./manage.py syncdb --migrate
-3. comment in SOUTH_MIGRATION_MODULES in www/settings.py
-4. ./manage.py migrate --delete-ghost-migrations
+https://github.com/Fantomas42/django-blog-zinnia/issues/115
+robertour commented on 8 Nov 2013:
+
+$ python manage.py schemamigration zinnia --auto
+$ python manage.py migrate zinnia
 
 It's not completely clear to me how future migrations in zinnia will be applied...
 
