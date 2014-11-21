@@ -115,12 +115,15 @@ else:
     )
 
 COMPRESS_ENABLED = True
+COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
+
 
 # offline compression does not work with sekizai (which is required for Django CMS)
 # https://github.com/django-compressor/django-compressor/issues/351
 # https://www.merenbach.com/2013/04/04/a-blocking-issue/
 # at least not for now.
 COMPRESS_OFFLINE = False
+
 
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
 
