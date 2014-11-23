@@ -25,9 +25,6 @@ ADMINS = (
   ('Les Kleuver', 'les.kleuver@gmail.com'),
 )
 
-
-DEBUG = True
-
 MANAGERS = ADMINS
 SEND_BROKEN_LINK_EMAILS = False
 CELERY_SEND_TASK_ERROR_EMAILS = True
@@ -115,7 +112,7 @@ else:
     )
 
 COMPRESS_ENABLED = True
-COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
+# COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
 
 
 # offline compression does not work with sekizai (which is required for Django CMS)
