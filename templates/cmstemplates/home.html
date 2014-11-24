@@ -63,19 +63,8 @@
   </div>
 </div>
 
-<div class="banner">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="banner-img" style="background-image: url('{% static "website/img/temp.jpg" %}');">
-        </div>
 
-        <h3>Crunch jeugd team zoekt spelers!</h3>
-        <p>Elke dinsdag en donderdag van 18:00-19:30 sportpark Drieburg. Doe ook Mee!</p>
-        <a class="btn btn-primary">Info</a>
-      </div>
-    </div>
-  </div>
-</div>
+
+{% include "include/_banner.html" with photo="website/img/temp2.jpg" header="Jeugd" text="Ben je tussen de 12 en 18 jaar, kom dan een keer langs" url="/jeugd" cta="Meer info" %}
 
 {% endblock %}

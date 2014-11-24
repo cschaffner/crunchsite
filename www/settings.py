@@ -235,69 +235,31 @@ if ON_HEROKU:
             'retry_timeout': 2,
         }
     },
-    # 'staticfiles': {
-    #   "BACKEND": "django_pylibmc.memcached.PyLibMCCache",
-    #   "TIMEOUT": 60 * 60 * 24 * 365,
-    #   'BINARY': True,
-    #   'OPTIONS': {
-    #     'tcp_nodelay': True,
-    #     'remove_failed': 4
-    #   }
-    # }
-
   }
 else:
   if DEBUG:
-  # disable caches for development
     CACHES = {
        'default': {
          'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
       }
     }
   else:
-    # # or turn it on for testing
     CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
         }
     }
-    # or turn file-cache on for testing
-    # CACHES = {
-    #   'default': {
-    #       'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-    #       'LOCATION': '/var/tmp/django_cache',
-    #   }
-    # }
-
-# CACHE_MIDDLEWARE_ALIAS = 'default'
-# CACHE_MIDDLEWARE_SECONDS = 0
-# CACHE_MIDDLEWARE_KEY_PREFIX = ''
-
-# CMS_CACHE_DURATIONS = {'content': 60}
-
-# ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 LOGIN_REDIRECT_URL = 'member:my_detail'
 SOCIALACCOUNT_QUERY_EMAIL = True
-# SOCIALACCOUNT_PROVIDERS = \
-#     {'facebook':
-#        {'SCOPE': ['email', 'publish_stream'],
-#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-#         'METHOD': 'oauth2',
-#         'LOCALE_FUNC': 'path.to.callable',
-#         'VERIFIED_EMAIL': False}}
-
 
 ROOT_URLCONF = 'www.urls'
 
-# Python dotted path to the WSGI application used by Django's runserver.
+
 WSGI_APPLICATION = 'www.wsgi.application'
 
 TEMPLATE_DIRS = (
-  # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-  # Always use forward slashes, even on Windows.
-  # Don't forget to use absolute paths, not relative paths.
   os.path.join(PROJECT_PATH, "templates"),
 )
 
@@ -308,7 +270,6 @@ LANGUAGES = [
 CMS_TEMPLATES = (
   ('cmstemplates/default_section.html', 'Default section'),
   ('cmstemplates/home.html', 'HOME'),
-  # ('cmstemplates/faq.html', 'FAQ'),
   ('cmstemplates/thumbgrid.html', "Grid"),
   ('cmstemplates/message.html', 'Plain message'),
   ('cmstemplates/section_no_sidebar.html', 'CMS section without side bar'),

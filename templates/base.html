@@ -29,8 +29,9 @@
 
     {% include "include/_mainnav.html" %}
 
-    {% block base_content %}{% endblock %}
-
+    <div class="base-content">
+      {% block base_content %}{% endblock %}
+    </div>
     {% include "include/_footer.html" %}
 
     {% compress js %}

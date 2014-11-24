@@ -1,0 +1,9 @@
+{% load static %}
+
+<div class="banner" style="background-image:url('{% static photo %}')">
+  <div class="banner-content">
+    <h2>{{ header }}</h2>
+    <p>{{ text }}</p>
+    <a class="btn btn-info" href="{{ url }}">{{ cta }}</a>
+  </div>
+</div>
