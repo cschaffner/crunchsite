@@ -54,6 +54,7 @@ djangocms-video==0.1
 easy-thumbnails==2.0.1
 futures==2.1.6
 gunicorn==19.1.1
+honcho==0.5.0
 html5lib==0.999
 kombu==3.0.24
 newrelic==2.38.0.31
