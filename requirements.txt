@@ -9,7 +9,7 @@ boto==2.34.0
 celery==3.1.17
 cmsplugin-contact==1.1.0
 cmsplugin-filer==0.10.1
-cmsplugin-zinnia==0.6
+-e git://github.com/vectart/cmsplugin-zinnia.git@1539e890ae2e6eed76c0d07042659f38944dd582#egg=cmsplugin_zinnia-master
 diff-match-patch==20121119
 dj-database-url==0.3.0
 dj-static==0.0.6
