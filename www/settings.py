@@ -150,8 +150,8 @@ COMPRESS_URL = "http://{0}.s3-external-3.amazonaws.com/static/".format(AWS_STORA
 # for now, I'm following the solutions form here:
 # http://stackoverflow.com/questions/15532464/django-compressor-not-setting-absolute-css-image-paths-on-heroku/17033883#17033883
 COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    # 'www.compress_filters.CustomCssAbsoluteFilter',
+    # 'compressor.filters.css_default.CssAbsoluteFilter',
+    'www.compress_filters.CustomCssAbsoluteFilter',
     # 'compressor.filters.cssmin.CSSMinFilter',
 ]
 
