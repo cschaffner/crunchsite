@@ -130,8 +130,8 @@ AWS_S3_CUSTOM_DOMAIN = '{0}.s3-external-3.amazonaws.com'.format(AWS_STORAGE_BUCK
 S3_URL = 'https://s3-eu-west-1.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 
 DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
-DEFAULT_S3_PATH = "media"
-MEDIA_ROOT = '/%s/' % DEFAULT_S3_PATH
+DEFAULT_S3_PATH = "static"
+MEDIA_ROOT = '/media/'
 MEDIA_URL = '//s3-eu-west-1.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
 
 # maybe we have to change this to False at some point
@@ -144,6 +144,16 @@ AWS_IS_GZIPPED = False
 # COMPRESS_ENABLED = True
 COMPRESS_STORAGE = 's3_folder_storage.s3.DefaultStorage'
 COMPRESS_URL = "http://{0}.s3-external-3.amazonaws.com/static/".format(AWS_STORAGE_BUCKET_NAME)
+
+# There is a long discussion about relative urls in CSS here:
+# https://github.com/django-compressor/django-compressor/issues/226
+# for now, I'm following the solutions form here:
+# http://stackoverflow.com/questions/15532464/django-compressor-not-setting-absolute-css-image-paths-on-heroku/17033883#17033883
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    # 'www.compress_filters.CustomCssAbsoluteFilter',
+    # 'compressor.filters.cssmin.CSSMinFilter',
+]
 
 # COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
 
