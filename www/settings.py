@@ -93,12 +93,6 @@ STATICFILES_FINDERS = (
 MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = 'staticfiles'
-# os.path.join(PROJECT_PATH, "static")
-STATIC_URL = "/static/"
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-# STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 if ON_HEROKU:
     LESS_BINARY = os.path.join(os.getcwd(), '.heroku/python/bin/lessc')
@@ -110,16 +104,6 @@ else:
     COMPRESS_PRECOMPILERS = (
         ('text/less', os.path.abspath(os.path.dirname(__file__) + '/../node_modules/less/bin/lessc {infile} {outfile}')),
     )
-
-COMPRESS_ENABLED = True
-# COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
-
-
-# offline compression does not work with sekizai (which is required for Django CMS)
-# https://github.com/django-compressor/django-compressor/issues/351
-# https://www.merenbach.com/2013/04/04/a-blocking-issue/
-# at least not for now.
-COMPRESS_OFFLINE = False
 
 
 COUNTRIES_FLAG_URL = 'flags/{code}.png'
@@ -142,6 +126,7 @@ AWS_HEADERS = {
   "Cache-Control": "public, max-age=86400",
 }
 AWS_STORAGE_BUCKET_NAME = 'crunchweb'
+AWS_S3_CUSTOM_DOMAIN = '{0}.s3-external-3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
 S3_URL = 'https://s3-eu-west-1.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 
 DEFAULT_FILE_STORAGE = 's3_folder_storage.s3.DefaultStorage'
@@ -156,14 +141,35 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_REDUCED_REDUNDANCY = False
 AWS_IS_GZIPPED = False
 
+# COMPRESS_ENABLED = True
+COMPRESS_STORAGE = 's3_folder_storage.s3.DefaultStorage'
+COMPRESS_URL = "http://{0}.s3-external-3.amazonaws.com/static/".format(AWS_STORAGE_BUCKET_NAME)
+
+# COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
+
+
+# offline compression does not work with sekizai (which is required for Django CMS)
+# https://github.com/django-compressor/django-compressor/issues/351
+# https://www.merenbach.com/2013/04/04/a-blocking-issue/
+# at least not for now.
+COMPRESS_OFFLINE = False
 
 
 # disabling serving static files from S3 for now, until
 # TODO: js issues are resolved
-#STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
-#STATIC_S3_PATH = "static"
-#STATIC_ROOT = "/%s/" % STATIC_S3_PATH
-#STATIC_URL = '//s3-eu-west-1.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
+STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
+STATIC_S3_PATH = "static"
+STATIC_ROOT = "/%s/" % STATIC_S3_PATH
+STATIC_URL = COMPRESS_URL
+
+# STATIC_URL = '//s3-eu-west-1.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
+
+# STATIC_ROOT = 'staticfiles'
+# os.path.join(PROJECT_PATH, "static")
+# STATIC_URL = "/static/"
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'crunchsite.herokuapp.com', 'crunch-ultimate.net', 'localhost']
