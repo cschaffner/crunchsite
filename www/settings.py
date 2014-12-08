@@ -15,10 +15,14 @@ if 'ON_HEROKU' in os.environ:
     else:
         DEBUG = False
     SITE_ID = 1  # crunchsite.herokuapp.com
-else:
+else:  # local development
     DEBUG = False
     SITE_ID = 1 # crunchsite.herokuapp.com
     # SITE_ID = 2 # 127.0.0.1:8000
+
+# choice between using S3 to serve static files or the local file system
+USE_S3_STATIC = ON_HEROKU
+
 
 ADMINS = (
   ('Christian Schaffner', 'huebli@gmail.com'),
@@ -33,7 +37,6 @@ TEMPLATE_DEBUG = DEBUG
 
 DATETIME_FORMAT = 'l, j E Y, G:i'
 DATE_FORMAT = 'l, j E Y'
-
 
 
 # Parse database configuration from $DATABASE_URL (required for Heroku)
@@ -118,7 +121,6 @@ if ON_HEROKU:
   # Amazon S3 credentials
   AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
   AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-
   SECRET_KEY = os.environ['SECRET_KEY']
 
 # Amazon S3 URL
@@ -141,44 +143,39 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_REDUCED_REDUNDANCY = False
 AWS_IS_GZIPPED = False
 
-# COMPRESS_ENABLED = True
-COMPRESS_STORAGE = 's3_folder_storage.s3.DefaultStorage'
-COMPRESS_URL = "http://{0}.s3-external-3.amazonaws.com/static/".format(AWS_STORAGE_BUCKET_NAME)
-
-# There is a long discussion about relative urls in CSS here:
-# https://github.com/django-compressor/django-compressor/issues/226
-# for now, I'm following the solutions form here:
-# http://stackoverflow.com/questions/15532464/django-compressor-not-setting-absolute-css-image-paths-on-heroku/17033883#17033883
-COMPRESS_CSS_FILTERS = [
-    # 'compressor.filters.css_default.CssAbsoluteFilter',
-    'www.compress_filters.CustomCssAbsoluteFilter',
-    # 'compressor.filters.cssmin.CSSMinFilter',
-]
-
-# COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
-
-
 # offline compression does not work with sekizai (which is required for Django CMS)
 # https://github.com/django-compressor/django-compressor/issues/351
 # https://www.merenbach.com/2013/04/04/a-blocking-issue/
 # at least not for now.
 COMPRESS_OFFLINE = False
 
+if USE_S3_STATIC:
+    COMPRESS_STORAGE = 's3_folder_storage.s3.DefaultStorage'
+    COMPRESS_URL = "http://{0}.s3-external-3.amazonaws.com/static/".format(AWS_STORAGE_BUCKET_NAME)
 
-# disabling serving static files from S3 for now, until
-# TODO: js issues are resolved
-STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
-STATIC_S3_PATH = "static"
-STATIC_ROOT = "/%s/" % STATIC_S3_PATH
-STATIC_URL = COMPRESS_URL
+    # There is a long discussion about relative urls in CSS here:
+    # https://github.com/django-compressor/django-compressor/issues/226
+    # for now, I'm following the solutions form here:
+    # http://stackoverflow.com/questions/15532464/django-compressor-not-setting-absolute-css-image-paths-on-heroku/17033883#17033883
+    COMPRESS_CSS_FILTERS = [
+        # 'compressor.filters.css_default.CssAbsoluteFilter',
+        'www.compress_filters.CustomCssAbsoluteFilter',
+        # 'compressor.filters.cssmin.CSSMinFilter',
+    ]
 
-# STATIC_URL = '//s3-eu-west-1.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
+    # COMPRESS_REBUILD_TIMEOUT = 60*60 # 1 hour in seconds, standard is 30 days, but there's a problem on heroku with compressor caches that disappear...
 
-# STATIC_ROOT = 'staticfiles'
-# os.path.join(PROJECT_PATH, "static")
-# STATIC_URL = "/static/"
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+    STATICFILES_STORAGE = 's3_folder_storage.s3.StaticStorage'
+    STATIC_S3_PATH = "static"
+    STATIC_ROOT = "/%s/" % STATIC_S3_PATH
+    STATIC_URL = COMPRESS_URL
+else: # local and debug
+    STATIC_ROOT = 'staticfiles'
+    os.path.join(PROJECT_PATH, "static")
+    STATIC_URL = "/static/"
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    COMPRESS_URL = STATIC_URL
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
