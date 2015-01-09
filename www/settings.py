@@ -179,7 +179,7 @@ else: # local and debug
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'crunchsite.herokuapp.com', 'crunch-ultimate.net', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'crunchsite.herokuapp.com', 'crunch-ultimate.net', 'www.crunch-ultimate.net', 'localhost']
 
 
 # List of callables that know how to import templates from various sources.
