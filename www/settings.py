@@ -281,12 +281,11 @@ LANGUAGES = [
 ]
 
 CMS_TEMPLATES = (
-  ('cmstemplates/default_section.html', 'Default section'),
-  ('cmstemplates/home.html', 'HOME'),
-  ('cmstemplates/thumbgrid.html', "Grid"),
-  ('cmstemplates/message.html', 'Plain message'),
-  ('cmstemplates/section_no_sidebar.html', 'CMS section without side bar'),
   ('cmstemplates/article.html', 'Article'),
+  ('cmstemplates/default_section.html', 'Article (sidebar)'),
+  ('cmstemplates/home.html', '(sys) HOME'),
+  ('cmstemplates/message.html', '(sys) Plain message'),
+
 )
 CMS_PERMISSION = True
 
