@@ -1,1 +1,90 @@
-[{"pk": 1, "model": "mailgun.email", "fields": {"job": 1, "team": null, "list": false, "email": "chairman@crunch-ultimate.net", "description": ""}}, {"pk": 2, "model": "mailgun.email", "fields": {"job": 1, "team": null, "list": false, "email": "president@crunch-ultimate.net", "description": ""}}, {"pk": 3, "model": "mailgun.email", "fields": {"job": 2, "team": null, "list": false, "email": "treasurer@crunch-ultimate.net", "description": ""}}, {"pk": 4, "model": "mailgun.email", "fields": {"job": 4, "team": null, "list": false, "email": "secretary@crunch-ultimate.net", "description": ""}}, {"pk": 5, "model": "mailgun.email", "fields": {"job": 5, "team": null, "list": false, "email": "competition@crunch-ultimate.net", "description": ""}}, {"pk": 6, "model": "mailgun.email", "fields": {"job": 7, "team": null, "list": false, "email": "youth@crunch-ultimate.net", "description": ""}}, {"pk": 7, "model": "mailgun.email", "fields": {"job": 7, "team": null, "list": false, "email": "jeugd@crunch-ultimate.net", "description": ""}}, {"pk": 8, "model": "mailgun.email", "fields": {"job": 8, "team": null, "list": false, "email": "generalboard@crunch-ultimate.net", "description": ""}}]
+[
+    {
+        "pk": 1,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 1,
+            "team": null,
+            "list": false,
+            "email": "chairman@crunch-ultimate.net",
+            "description": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 1,
+            "team": null,
+            "list": false,
+            "email": "president@crunch-ultimate.net",
+            "description": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 2,
+            "team": null,
+            "list": false,
+            "email": "treasurer@crunch-ultimate.net",
+            "description": ""
+        }
+    },
+    {
+        "pk": 4,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 4,
+            "team": null,
+            "list": false,
+            "email": "secretary@crunch-ultimate.net",
+            "description": ""
+        }
+    },
+    {
+        "pk": 5,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 5,
+            "team": null,
+            "list": false,
+            "email": "competition@crunch-ultimate.net",
+            "description": ""
+        }
+    },
+    {
+        "pk": 6,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 7,
+            "team": null,
+            "list": false,
+            "email": "youth@crunch-ultimate.net",
+            "description": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 7,
+            "team": null,
+            "list": false,
+            "email": "jeugd@crunch-ultimate.net",
+            "description": ""
+        }
+    },
+    {
+        "pk": 8,
+        "model": "mailgun.email",
+        "fields": {
+            "job": 8,
+            "team": null,
+            "list": false,
+            "email": "generalboard@crunch-ultimate.net",
+            "description": ""
+        }
+    }
+]

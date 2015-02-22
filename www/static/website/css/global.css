@@ -2,6 +2,15 @@ body,
 html {
   height: 100%;
 }
+.base-content {
+  min-height: 100%;
+  margin-bottom: -200px;
+}
+.base-content:after {
+  content: "";
+  display: block;
+  height: 200px;
+}
 .sidebar .plugin {
   border-radius: 8px;
   background-color: #ebedf5;
@@ -24,5 +33,85 @@ html {
   text-align: center;
 }
 .sidebar .plugin a.btn {
+  display: block;
+}
+.ctas {
+  margin-top: -30px;
+  padding: 30px 0 30px 0;
+  background-color: #e1e7e9;
+}
+.ctas .cta-item a {
+  display: block;
+  text-align: center;
+  margin: auto;
+  text-decoration: none;
+}
+.ctas .cta-item a i {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 8px auto;
+  border-radius: 40px;
+  border: 4px solid #de4f4f;
+  color: #de4f4f;
+  font-size: 40px;
+  display: block;
+  padding-top: 14px;
+}
+.ctas .cta-item a em {
+  display: block;
+  margin: auto;
+}
+.ctas .cta-item a strong span {
+  font-weight: normal;
+  font-size: 11px;
+}
+.opener {
+  margin-bottom: 30px;
+}
+.opener p {
+  text-align: center;
+  max-width: 640px;
+  margin: auto;
+  padding: 0 20px 20px 20px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: lighter;
+}
+.banner {
+  background: #3a3c47 no-repeat center center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  margin: 30px 0 30px 0;
+  overflow: hidden;
+  height: 400px;
+}
+.banner .banner-content {
+  float: right;
+  width: 320px;
+  height: 400px;
+  padding: 30px;
+  background-image: -webkit-linear-gradient(left, rgba(222, 79, 79, 0) 0%, #de4f4f 100%);
+  background-image: -o-linear-gradient(left, rgba(222, 79, 79, 0) 0%, #de4f4f 100%);
+  background-image: linear-gradient(to right, rgba(222, 79, 79, 0) 0%, #de4f4f 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00de4f4f', endColorstr='#ffde4f4f', GradientType=1);
+}
+.banner .banner-content h2 {
+  color: #fff;
+  font-weight: 100;
+  font-size: 50px;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  padding: 0;
+}
+.banner .banner-content p {
+  color: #fff;
+  font-weight: 100;
+  font-size: 18px;
+  text-align: center;
+}
+.banner .banner-content a.btn {
   display: block;
 }

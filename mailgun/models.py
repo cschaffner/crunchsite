@@ -47,7 +47,8 @@ class Email(models.Model):
                     auth=('api', settings.MAILGUN_API_KEY),
                     data={'address': '{0}'.format(self.email),
                           'name': '{0}'.format(self.team.name),
-                          'description': "mailing list for team {0}".format(self.team.name)})
+                          'description': "mailing list for team {0}".format(self.team.name),
+                          'access-level': 'members'})
             except requests.ConnectionError:
                 response.status_code = 600
                 response._content = u'could not connect to Mailgun'
