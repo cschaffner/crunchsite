@@ -392,8 +392,6 @@ INSTALLED_APPS = (
     'team',
     'localflavor',
     'import_export',
-    'zinnia',
-    'cmsplugin_zinnia',
     'mailgun',
 )
 
