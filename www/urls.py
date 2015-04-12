@@ -13,8 +13,8 @@ urlpatterns = i18n_patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^accounts/', include('allauth.urls')),
-    # url(r'^news/', include('zinnia.urls'), name='zinnia'),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^playtime/', include('playtime.urls')),
 )
 
 

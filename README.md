@@ -169,3 +169,12 @@ $ heroku config:unset HEROKU_DEBUG
 
 Django Compressor / Less / Heroku Installation instructions:
 http://marklmiddleton.com/2013/using-less-with-django-on-heroku/
+
+
+Migrate to django 1.7
+
+Ensure all installs are fully up-to-date with their migrations.
+Remove 'south' from INSTALLED_APPS.
+Delete all your (numbered) migration files, but not the directory or __init__.py - make sure you remove the .pyc files too.
+Run python manage.py makemigrations. Django should see the empty migration directories and make new initial migrations in the new format.
+Run python manage.py migrate --fake-initial. Django will see that the tables for the initial migrations already exist and mark them as applied without running them. (Django won’t check that the table schema match your models, just that the right table names exist).
