@@ -197,7 +197,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'cms.context_processors.cms_settings',
     'sekizai.context_processors.sekizai',
-    'zinnia.context_processors.version',
     # Required by allauth template tags
     "django.core.context_processors.request",
     # allauth specific context processors
@@ -404,14 +403,14 @@ THUMBNAIL_PROCESSORS = (
   'easy_thumbnails.processors.filters',
 )
 
-#ZINNIA (BLOG) SETTINGS
-ZINNIA_AUTO_CLOSE_COMMENTS_AFTER = 0
-# hmmm, migrate does not work here...
-ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
-
-SOUTH_MIGRATION_MODULES = {
-    'zinnia': 'migrations.zinnia',
-}
+# #ZINNIA (BLOG) SETTINGS
+# ZINNIA_AUTO_CLOSE_COMMENTS_AFTER = 0
+# # hmmm, migrate does not work here...
+# ZINNIA_ENTRY_BASE_MODEL = 'cmsplugin_zinnia.placeholder.EntryPlaceholder'
+#
+# SOUTH_MIGRATION_MODULES = {
+#     'zinnia': 'migrations.zinnia',
+# }
 
 RECAPTCHA_PUBLIC_KEY = '6Lclf-wSAAAAABiYzvnSKXBjOKf1ENPA4B5h5ZnC'
 RECAPTCHA_PRIVATE_KEY = '6Lclf-wSAAAAAKUfTJwkd_LhotOQ7tLYtFs5-WZx'
