@@ -99,6 +99,15 @@ and comments out
 in the applications, use newer app django_comments instead.
 
 
+6. in Nov 2015, I've updated a bunch of packages, but did not manage to upgrade to Django 1.7 nor to DjangoCMS 3.1
+without causing too much trouble. So for now, we are sticking to Django 1.6.10 and DjangoCMS 3.0.x
+* migration of django_comments had to be faked
+* I've created an SQL script to drop the (probably old) "cmsplugin_filerimage" table:
+$ psql -h localhost -d crunchsite -f sqlscripts/remove_cmsplugin_filerimage.sql
+* then it's possible to run
+./manage cms delete_orphaned_plugins
+to resolve problems with cmsplugin_filer_image
+
 
 
 Push master branch to heroku:
