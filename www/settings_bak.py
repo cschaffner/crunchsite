@@ -4,8 +4,6 @@ import os
 gettext = lambda s: s
 PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
-TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
-
 # check if we are on heroku (production) or on local development
 ON_HEROKU = False
 if 'ON_HEROKU' in os.environ:
@@ -35,7 +33,6 @@ MANAGERS = ADMINS
 SEND_BROKEN_LINK_EMAILS = False
 CELERY_SEND_TASK_ERROR_EMAILS = True
 
-TEMPLATE_DEBUG = DEBUG
 
 DATETIME_FORMAT = 'l, j E Y, G:i'
 DATE_FORMAT = 'l, j E Y'
@@ -184,25 +181,42 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 ALLOWED_HOSTS = ['127.0.0.1', 'crunchsite.herokuapp.com', 'crunch-ultimate.net', 'www.crunch-ultimate.net', 'localhost']
 
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-  'django.template.loaders.filesystem.Loader',
-  'django.template.loaders.app_directories.Loader',
-)
+TEMPLATES = [
+{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors':
+            (
+            'django.contrib.auth.context_processors.auth',
+            'django.template.context_processors.debug',
+            'django.template.context_processors.i18n',
+            'django.template.context_processors.media',
+            'django.template.context_processors.static',
+            'django.template.context_processors.tz',
+            'django.template.context_processors.csrf',
+            'django.template.context_processors.request',
+            'django.contrib.messages.context_processors.messages',
+            'sekizai.context_processors.sekizai',
+            'cms.context_processors.cms_settings',
+            # allauth specific context processors
+            "allauth.account.context_processors.account",
+            "allauth.socialaccount.context_processors.socialaccount",
+            ),
+        # 'loaders':
+        #     (
+        #      'django.template.loaders.filesystem.Loader',
+        #      'django.template.loaders.app_directories.Loader',
+        #     ),
+    },
+},
+]
+# TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+# TEMPLATE_DIRS = (
+#   os.path.join(PROJECT_PATH, "templates"),
+# )
+# TEMPLATE_DEBUG = DEBUG
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'cms.context_processors.cms_settings',
-    'sekizai.context_processors.sekizai',
-    # allauth specific context processors
-    # "allauth.account.context_processors.account",
-    # "allauth.socialaccount.context_processors.socialaccount",
-)
 
 AUTHENTICATION_BACKENDS = (
   # Needed to login by username in Django admin, regardless of `allauth`
@@ -271,9 +285,6 @@ ROOT_URLCONF = 'www.urls'
 
 WSGI_APPLICATION = 'www.wsgi.application'
 
-TEMPLATE_DIRS = (
-  os.path.join(PROJECT_PATH, "templates"),
-)
 
 LANGUAGES = [
   ('en', 'English'),
@@ -355,9 +366,9 @@ INSTALLED_APPS = (
     'compressor',
     'cms',
     'tagging',
-    'mptt',
+    # 'mptt',
     'menus',
-    'south',
+    # 'south',
     'sekizai',
     'djangocms_style',
     'djangocms_column',
@@ -392,7 +403,7 @@ INSTALLED_APPS = (
     'localflavor',
     'import_export',
     'mailgun',
-    # 'treebeard',
+    'treebeard',
 )
 
 THUMBNAIL_HIGH_RESOLUTION = True
@@ -413,6 +424,32 @@ THUMBNAIL_PROCESSORS = (
 #     'zinnia': 'migrations.zinnia',
 # }
 
+MIGRATION_MODULES = {
+    # Add also the following modules if you're using these plugins:
+    'mailgun': 'mailgun.migrations_django',
+    'team': 'team.migrations_django',
+    'member': 'member.migrations_django',
+    'cms': 'cms.migrations_django',
+    'cmsplugin_contact': 'cmsplugin_contact.migrations_django',
+    'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
+    'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
+    'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
+    'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
+    'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
+    'djangocms_column': 'djangocms_column.migrations_django',
+    'djangocms_style': 'djangocms_style.migrations_django',
+    'djangocms_file': 'djangocms_file.migrations_django',
+    'djangocms_flash': 'djangocms_flash.migrations_django',
+    'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
+    'djangocms_inherit': 'djangocms_inherit.migrations_django',
+    # 'djangocms_link': 'djangocms_link.migrations_django',
+    'djangocms_picture': 'djangocms_picture.migrations_django',
+    'djangocms_snippet': 'djangocms_snippet.migrations_django',
+    'djangocms_teaser': 'djangocms_teaser.migrations_django',
+    'djangocms_video': 'djangocms_video.migrations_django',
+    # 'djangocms_text_ckeditor': 'djangocms_text_ckeditor.migrations_django',
+}
+
 RECAPTCHA_PUBLIC_KEY = '6Lclf-wSAAAAABiYzvnSKXBjOKf1ENPA4B5h5ZnC'
 RECAPTCHA_PRIVATE_KEY = '6Lclf-wSAAAAAKUfTJwkd_LhotOQ7tLYtFs5-WZx'
 
@@ -428,6 +465,7 @@ LEAGUEVINE_TOKEN_URL = "https://www.leaguevine.com"
 # LEAGUEVINE_HOST = "http://api.localhost:8000"
 # LEAGUEVINE_TOKEN_URL = "http://localhost:8000"
 
+TEST_RUNNER = 'django.test.simple.DjangoTestSuiteRunner'
 
 if ON_HEROKU:
   #TWITTER

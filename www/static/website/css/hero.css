@@ -1,9 +1,11 @@
+util.print: Use console.log instead
 #hero {
   margin-top: -20px;
-  height: 432px;
+  height: 460px;
   background-color: #de4f4f;
   overflow: hidden;
   margin-bottom: 30px;
+  width: 100%;
 }
 #hero .spotlight {
   height: 432px;
